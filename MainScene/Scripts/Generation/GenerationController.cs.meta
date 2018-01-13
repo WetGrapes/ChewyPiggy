@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d4e737267c3a25843b4f99a5365c15e3
+timeCreated: 1515641332
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Ground: {fileID: 1674040023423782, guid: e66a708a198d53048bc1502bc9cad7dd, type: 2}
+  - GroundRenderer: {fileID: 212663128533184834, guid: e66a708a198d53048bc1502bc9cad7dd,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c7c75ebf6c7e76147ab995f6d42366a6
+timeCreated: 1514269033
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BROTHER
+  fontNames:
+  - BROTHER
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
