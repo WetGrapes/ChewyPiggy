@@ -1103,6 +1103,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1889754818}
     m_Modifications:
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[1].Obs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4399153062487608, guid: 9f1a62b556259cc4c935aae480f3fa8b, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.562924
@@ -1174,6 +1179,66 @@ Prefab:
       propertyPath: EdgeChecher.Array.data[1]
       value: 
       objectReference: {fileID: 2041698280}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].AmountSet
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[0].UpDownRandom
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[0].SetOfGround
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[0].DownSet
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[0].Obs.Array.data[0].Z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[0].Obs.Array.data[1].Z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[1].UpDownRandom
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[1].SetOfGround
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[1].DownSet
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[0].ListName
+      value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: Datas.Array.data[0].Parts.Array.data[0].ObsList.Array.data[1].ListName
+      value: All
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881308383645782, guid: 9f1a62b556259cc4c935aae480f3fa8b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f1a62b556259cc4c935aae480f3fa8b, type: 2}
   m_IsPrefabParent: 0

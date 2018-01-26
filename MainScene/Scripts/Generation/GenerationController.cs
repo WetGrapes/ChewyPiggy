@@ -15,7 +15,7 @@ public class GenerationController : MonoBehaviour {
 	GameObject[] Obs = new GameObject[500];
 	[SerializeField] private GameObject[] EdgeChecher = new GameObject[6];
 
-	Vector2 LimitValue,   PercentLimit;
+	//Vector2 LimitValue,   PercentLimit;
 	Vector3 Coordinate, LeftCoord, RightCoord, MaxCoord, ObjectCoordinate;
 
 	int numOfEdgeChecker = 2;
@@ -24,9 +24,9 @@ public class GenerationController : MonoBehaviour {
 	int  RanObs, RanUpDown, LevelStage, RanList, RanParts, UpDownRanInit;
 	int NumOfObjects, NumOfGround;
 	int GroundSet , DownSet, AmountSet;
-	int XLvl=1, GBSetStep=0;
+	int XLvl=1;
 	int[] GBSet = new int[8], ObsSet = new int[8];
-	float Timer = 2f;
+	//float Timer = 2f;
 
 	void Start () {
 
@@ -155,7 +155,7 @@ public class GenerationController : MonoBehaviour {
 				Coordinate += new Vector3 (RanX, 0, 0);
 
 				if ((Chance > ChanceOfPanel - (ChanceOfPanel / 2)) && ChanceOfPanel != 0 
-					&& NumOfGround + 1 < GB.Length && NumOfGround < LimitValue.x+LimitValue.y) {
+					&& NumOfGround + 1 < GB.Length) {
 
 					if (Chance == ChanceOfPanel * 3 - 3) {
 						GroundSet = 1;

@@ -5,8 +5,10 @@ using UnityEngine;
 public class ListOfObjects 
 {
 	public string ListName;
-	public Vector2 PartsSize_Max30Int;
-	public int NumOfObs, UpDownRandom, SetOfGround, DownSet;
+	//[Range (1, 7)] public int NumOfObs;
+	[Range (1, 5)] public int UpDownRandom; 
+	[Range (4, 10)] public int SetOfGround;
+	[Range (1, 8)] public int DownSet;
 	public ObjectData[] Obs;
 
 }

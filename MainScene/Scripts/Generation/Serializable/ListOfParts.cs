@@ -5,7 +5,6 @@ using UnityEngine;
 public class ListOfParts  
 {
 	public string PartName;
-	//public Vector2 LevelPercent_Max100Perc;
-	public int AmountSet;
+	[Range (1, 10)] public int AmountSet;
 	public ListOfObjects[] ObsList;
 }
