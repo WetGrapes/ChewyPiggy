@@ -6,4 +6,5 @@ public class ObjectData
 {
 	public GameObject Obs;
 	[Range (1, 7)] public int Z;
+	public bool OneOnIsland;
 }
