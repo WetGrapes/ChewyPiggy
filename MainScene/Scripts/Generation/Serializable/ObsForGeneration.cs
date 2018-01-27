@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ObsForGeneration : MonoBehaviour {
 
-	public ListOfLevels[] Datas;
+	public ListOfLevels[] Datas = new ListOfLevels[1];
 }

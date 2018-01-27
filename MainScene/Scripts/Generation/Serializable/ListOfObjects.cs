@@ -4,10 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class ListOfObjects 
 {
-	public string ListName;
-	[Range (1, 5)] public int UpDownRandom; 
-	[Range (6, 12)] public int SetOfGround;
-	[Range (1, 8)] public int DownSet;
-	public ObjectData[] Obs;
+	public string ListName = "List No. ";
+	public ObjectData[] Obs = new ObjectData[5];
 
 }

@@ -41,7 +41,7 @@ public class PigTransform : MonoBehaviour {
 			if (Physics2D.OverlapCircle (Checker.transform.position, 0.2f, isGround)) {
 				ray = new Ray2D (new Vector2 (transform.position.x + Xsize * Xvect, transform.position.y - 0.3f), new Vector2 (Xvect, 0f));
 				//Debug.DrawRay (ray.origin, ray.direction);
-				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 1f);
+				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 1.5f);
 				if (hit.collider != null) {
 					if (Trans.speed > 2f) {
 						if (hit.collider.tag == "Ground")
