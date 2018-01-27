@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4384688700814196}
   - component: {fileID: 114881308383645782}
+  - component: {fileID: 114303086885939228}
+  - component: {fileID: 114271916757037224}
   - component: {fileID: 212913696672338290}
   m_Layer: 0
   m_Name: GenerationManager
@@ -27,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1174280946997450
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +109,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1249618918193886}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.562924, y: -13.50243, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -130,6 +132,37 @@ Transform:
   m_Father: {fileID: 4399153062487608}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114271916757037224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057700830108026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 074b89bc0a51905479fb247e0367ee76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Datas:
+  - LevelName: 
+    Parts: []
+--- !u!114 &114303086885939228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057700830108026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f498dede0a21add4a941945c6b217b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ground: {fileID: 1674040023423782, guid: e66a708a198d53048bc1502bc9cad7dd, type: 2}
+  Island: {fileID: 1834239492649702, guid: 985cfa39c3901044ebadd41fcefa2715, type: 2}
+  LeftChecker: {fileID: 1559144331794682, guid: 7b2a8928e29b49e4f9a4c0735206e95c,
+    type: 2}
+  RightChecker: {fileID: 1216027947557214, guid: 436b676d2404688458b056dcf6ca4977,
+    type: 2}
 --- !u!114 &114386201499041144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanvasOb: {fileID: 0}
-  CanvasObTrue: 0
+  CanvasObTrue: 1
   DoubleJump: {fileID: 0}
   DoubleJumpQuantity: 5
   DoubleJumpTrue: 0
@@ -163,14 +196,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainPersonTransform: {fileID: 0}
-  PigPos: {x: 0, y: 0}
+  PigPos: {x: 2.8491569, y: 6.310999}
   Dead: 0
   left: 0
   right: 0
   forceTrue: 0
   grounded: 0
   force: 100
-  speed: 0
+  speed: -0.001
   rotate: 180
 --- !u!114 &114881308383645782
 MonoBehaviour:
@@ -183,39 +216,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e737267c3a25843b4f99a5365c15e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Right: 0
+  GenerationActive: 1
+  Precipices: 0
   Datas:
-  - LevelName: First Level
+  - LevelName: 
     Parts:
-    - PartName: TreePart
-      AmountSet: 5
+    - PartName: 
+      AmountSet: 0
       ObsList:
-      - ListName: Standart
-        PartsSize_Max30Int: {x: 30, y: 30}
-        NumOfObs: 60
-        UpDownRandom: 2
-        SetOfGround: 10
-        DownSet: 6
-        Obs:
-        - ObsName: FirstTree
-          ThisSprite: {fileID: 212186189196561992, guid: 31c0792dab456204eb765f2c22945fcb,
-            type: 2}
-          Obs: {fileID: 1034408771570946, guid: 31c0792dab456204eb765f2c22945fcb,
-            type: 2}
-          Z: 2
-        - ObsName: 
-          ThisSprite: {fileID: 0}
-          Obs: {fileID: 0}
-          Z: 0
       - ListName: 
-        PartsSize_Max30Int: {x: 0, y: 0}
-        NumOfObs: 0
-        UpDownRandom: 0
-        SetOfGround: 0
-        DownSet: 0
-        Obs: []
-  Ground: {fileID: 1674040023423782, guid: e66a708a198d53048bc1502bc9cad7dd, type: 2}
-  GroundRenderer: {fileID: 212663128533184834, guid: e66a708a198d53048bc1502bc9cad7dd,
-    type: 2}
+        UpDownRandom: 2
+        SetOfGround: 9
+        DownSet: 2
+        Obs:
+        - Obs: {fileID: 0}
+          Z: 5
+          OneOnIsland: 1
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
+        - Obs: {fileID: 0}
+          Z: 0
+          OneOnIsland: 0
 --- !u!212 &212913696672338290
 SpriteRenderer:
   m_ObjectHideFlags: 1

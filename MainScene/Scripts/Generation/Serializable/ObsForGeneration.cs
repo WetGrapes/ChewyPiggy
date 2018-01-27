@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class ObsForGeneration : MonoBehaviour {
 
-	public GameObject Ground;
-	public GameObject Island;
-	public GameObject LeftChecker;
-	public GameObject RightChecker;
+	public ListOfLevels[] Datas;
 }

@@ -5,8 +5,7 @@ using UnityEngine.Sprites;
 
 
 public class SpriteList : MonoBehaviour {
-
-
+	
 	public int number;
 	public Sprite[] sprites; 
 	public SpriteRenderer sp; 
