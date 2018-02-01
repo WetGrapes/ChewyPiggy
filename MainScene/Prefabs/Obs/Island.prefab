@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4964103043580278}
+  - component: {fileID: 114182548488448602}
+  - component: {fileID: 114484762333075744}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -39,3 +41,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114182548488448602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834239492649702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2c6dff64cad314ba057ac600c707c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftChecker: {fileID: 0}
+  RightChecker: {fileID: 0}
+  ThisIslandActivate: 0
+--- !u!114 &114484762333075744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834239492649702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea287e8f3d320ce41ae5f5c2419fb4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

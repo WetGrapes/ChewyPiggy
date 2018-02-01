@@ -6,7 +6,7 @@ public class CameraManage : MonoBehaviour {
 	public Transform ThisCamTransform;
 	public Transform target;
 	PigTransformManagerScript Trans;
-	public float damping = 1, lookAheadFactor = 3, lookAheadReturnSpeed = 0.5f, lookAheadMoveThreshold = 0.1f;
+	public float damping = 1, lookAheadFactor = 3, lookAheadReturnSpeed = 0.5f, lookAheadMoveThreshold = 0.05f;
 	float offsetZ;
 	Vector3 lastTargetPosition;
 	Vector3 currentVelocity;

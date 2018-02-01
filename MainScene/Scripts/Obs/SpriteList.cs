@@ -5,15 +5,14 @@ using UnityEngine.Sprites;
 
 
 public class SpriteList : MonoBehaviour {
-
-
+	
 	public int number;
-	public static int size;
-	public Sprite[] sprites = new Sprite[size];
+	public Sprite[] sprites; 
 	public SpriteRenderer sp; 
 
- 
-
+	void Start(){
+		number = Random.Range (0, sprites.Length);
+	}
 
 	void Update() {
 		sp = GetComponent<SpriteRenderer> ();

@@ -4,9 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectData  
 {
-	public string ObsName ;
-	public SpriteRenderer ThisSprite ;
 	public GameObject Obs;
-	public int Z;
-	//public Transform ObsTransform ;
+	[Range (1, 7)] public int Z;
+	public bool OneOnIsland;
 }

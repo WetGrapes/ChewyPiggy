@@ -4,232 +4,219 @@ using UnityEngine;
 using UnityEngine.Sprites;
 
 public class GenerationController : MonoBehaviour {
+	
+	public bool Right = true , Precipices;
+	[Range (0, 100)] public int ChanceOfObject = 45;
+	public int XLvl=1;
 
-	public ListOfLevels[] Datas;
 
-	public GameObject Ground;
-	public SpriteRenderer GroundRenderer;
-	public bool Right, GenerationActive = true;
+	float RanY, timer;
+	int RanList, RanParts;
+	int GroundSet , DownSet, AmountSet, IslandNum;
+	bool[] OnIsland = new bool[50];
 
-	GameObject[] GB = new GameObject[8000];
-	GameObject[] Obs = new GameObject[500];
-	[SerializeField] private GameObject[] EdgeChecher = new GameObject[6];
+	Vector3 Coordinate, ObjectCoordinate;
+	ToolsForGeneration GenObs;
+	SpriteRenderer GroundRenderer;
+	ListOfLevels[] Datas ;
+	public GameObject[] Island = new GameObject[6];
 
-	Vector2 LimitValue,   PercentLimit;
-	Vector3 Coordinate, LeftCoord, RightCoord, MaxCoord, ObjectCoordinate;
-
-	int numOfEdgeChecker = 2;
-
-	float RanZ, RanX, RanY, YBeforeDownSet;
-	int  RanObs, RanUpDown, LevelStage, RanList, RanParts, UpDownRanInit;
-	int NumOfObjects, NumOfGround;
-	int GroundSet , DownSet, AmountSet;
-	int XLvl=1, GBSetStep=0;
-	int[] GBSet = new int[8], ObsSet = new int[8];
-	float Timer = 2f;
 
 	void Start () {
+		Island [2] = GameObject.Find ("Island");
+		GenObs = GetComponent<ToolsForGeneration> ();
+		Datas = GetComponent<ObsForGeneration> ().Datas;
+		GroundRenderer = GenObs.Ground.GetComponent<SpriteRenderer> ();
+	}
 
-		if (GenerationActive == true) {
-			for (LevelStage = Datas [0].Parts.Length; LevelStage != 0; LevelStage--) {	//считываем список частей
+
+	void FixedUpdate()
+	{
+		if (Island [2].GetComponent<IslandManage> ().ThisIslandActivate == true) {
+			if (Right == true) {
 				
-				RanParts = Random.Range (0, Datas [0].Parts.Length);		//выбираем случайную часть
-				RanList = Random.Range (0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами	
+				CreateInTime (Island [2].GetComponent<IslandManage> ().RightChecker.position, 1, 1); 	//правый остров
+				CreateInTime (Island [2].GetComponent<IslandManage> ().LeftChecker.position, 0, -1);	//левый остров
 
-				Coordinate = new Vector3 (Coordinate.x, Coordinate.y, -5); // сдвигаем вперед
-				Coordinate -= new Vector3 (0, 25, 0);
-
-				LeftCoord = Coordinate;
-				RightCoord = Coordinate;
-
-				LeftCoord -= new Vector3 (Random.Range (0, 10), 0, 0);
-				RightCoord += new Vector3 (Random.Range (0, 10), 0, 0);
-
-				Coordinate = LeftCoord;
-				XLvl = -1;
-				FullGroundInstantiate ();
-				Coordinate = RightCoord;
-				XLvl = 1;
-				FullGroundInstantiate ();
-				//Debug.Log ("Done!");
-			}
-			GenerationActive = false;
-		}
-	}
-
-	/*void Update () {
-		
-		Timer -= Time.deltaTime;
-		if (Timer < 0) {
-			CreateInTime ();
-			Timer = 2f;
-		}
-
-
-	}*/
-
-
-
-	/*void CreateInTime()
-	{
-		
-		Coordinate = new Vector3 (0, Coordinate.y, -5);
-		Coordinate -= new Vector3 (0, LimitValue.y-5, 0);
-		LeftCoord = new Vector3 (Random.Range(0, 10), Coordinate.y, 0);
-		RightCoord = new Vector3 (Random.Range(0, 10), Coordinate.y, 0);
-
-		RanParts = Random.Range(0, Datas [0].Parts.Length);		//выбираем случайную часть
-		RanList = Random.Range(0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами				
-
-		Coordinate = LeftCoord;
-		XLvl = -1;
-		FullGroundInstantiate ();
-
-		RanParts = Random.Range(0, Datas [0].Parts.Length);		//выбираем случайную часть
-		RanList = Random.Range(0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами				
-
-		Coordinate = RightCoord;
-		XLvl = 1;
-		FullGroundInstantiate ();
-
-		Coordinate-= new Vector3 (0, LimitValue.y-5, 0);
-		FullGroundInstantiate ();
-
-
-
-	}*/
-
-
-
-
-
-	void FullGroundInstantiate()
-	{
-		if (XLvl == 1)
-			EdgeChecher [numOfEdgeChecker++] = Instantiate (GameObject.Find ("LeftChecker"), Coordinate, Quaternion.identity) as GameObject;
-		else
-			EdgeChecher [numOfEdgeChecker++] = Instantiate (GameObject.Find ("RightChecker"), Coordinate, Quaternion.identity) as GameObject;
-
-
-		for (AmountSet = 1 + Random.Range (1, Datas [0].Parts [RanParts].AmountSet); AmountSet >= 0; AmountSet--) {
-			
-			UpDownRanInit = Datas [0].Parts [RanParts].ObsList [RanList].UpDownRandom;
-			RanUpDown = Random.Range (-UpDownRanInit, UpDownRanInit + 1);		//берем сдвиг высот
-			RanY = GroundRenderer.sprite.bounds.size.y * RanUpDown;		//превращаем в Y
-
-			if (RanUpDown > 1) {
-				for (; RanUpDown != 0; RanUpDown--) {
-					Coordinate += new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
-					InstantiateGround (2, 0);
-				}
-			} else if (RanUpDown < -1) {
-				for (; RanUpDown != 0; RanUpDown++) {
-					Coordinate -= new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
-					InstantiateGround (2, 0);
-				}
 			} else {
-				Coordinate += new Vector3 (0, RanY, 0);				//сдвигаем координаты
-			}	
+				
+				CreateInTime (Island [2].GetComponent<IslandManage> ().LeftChecker.position, 0, 1);	//левый остров
+				CreateInTime (Island [2].GetComponent<IslandManage> ().RightChecker.position, 1, -1); 	//правый остров
 
-			InstantiateGround (1 + Datas [0].Parts [RanParts].ObsList [RanList].SetOfGround, 2);
+			}
+			Island [2].GetComponent<IslandManage> ().ThisIslandActivate = false;
 		}
-
-
-		if (XLvl == 1)
-			EdgeChecher [numOfEdgeChecker++] = Instantiate (GameObject.Find ("RightChecker"), MaxCoord, Quaternion.identity) as GameObject;
-		else
-			EdgeChecher [numOfEdgeChecker++] = Instantiate (GameObject.Find ("LeftChecker"), MaxCoord, Quaternion.identity) as GameObject;
 	}
 
 
-	void InstantiateGround(int SetOfGround, int ChanceOfPanel)
+	void IslandInstantiate() ///функция генерации острова
 	{
-		int Chance = Random.Range (0, ChanceOfPanel*3);
-		if (ChanceOfPanel != 0) RanY = GroundRenderer.sprite.bounds.size.y * Random.Range (1, 5);
+		Island [IslandNum] = Instantiate (GenObs.Island, Coordinate, Quaternion.identity) as GameObject; // родитель остров
+		CheckerInstantiate (1); //чекер
+		// генерация нескольких сетов с перепадами высот
+		for (AmountSet = Random.Range (3, Datas [0].Parts [RanParts].AmountSet); AmountSet >= 0; AmountSet--) {
+			InstantiateUpDown (); // перепад высот
+			FullGroundInstantiate (1 + Datas [0].Parts [RanParts].SetOfGround, 2);
+		}
+		CheckerInstantiate (2); //чекер
 
+		for (var i = OnIsland.Length - 1; i >= 0; i--)  //зануление использованных данных после создания острова
+			OnIsland [i] = false;
+	}
+		
+
+	void FullGroundInstantiate (int SetOfGround, int ChanceOfPanel) ///функция генерации одного сета от острова
+	{
+		int Chance = Random.Range (0, ChanceOfPanel * 3);
+		if (ChanceOfPanel != 0)
+			RanY = GroundRenderer.sprite.bounds.size.y * Random.Range (2, 5);
 
 		for (GroundSet = Random.Range (1, SetOfGround); GroundSet != 0; GroundSet--) {
-			if (NumOfGround < GB.Length ) 
-			{
-				RanX = XLvl*GroundRenderer.sprite.bounds.size.x;
-				Coordinate += new Vector3 (RanX, 0, 0);
 
-				if ((Chance > ChanceOfPanel - (ChanceOfPanel / 2)) && ChanceOfPanel != 0 
-					&& NumOfGround + 1 < GB.Length && NumOfGround < LimitValue.x+LimitValue.y) {
+			float RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
+			Coordinate += new Vector3 (RanX, 0, 0);
 
-					if (Chance == ChanceOfPanel * 3 - 3) {
+			if ((Chance > ChanceOfPanel - (ChanceOfPanel / 2)) && ChanceOfPanel != 0) {
+				if (Precipices) {
+					if (Chance == ChanceOfPanel * 3 - 3)
 						GroundSet = 1;
-
-					} else {
-						Coordinate += new Vector3 (RanX, 2*RanY, 0);
-						IfMax ();
-						CreateObject (0);
-						instgr ();
-						Coordinate -= new Vector3 (RanX, 2*RanY, 0);
-						CreateObject (1);
-						DownGround ();
-
-
-					}
+					else
+						InstaniatePlatformSet (); 
 				} else {
-					IfMax ();
-					CreateObject (1);
-					DownGround ();
+					InstaniatePlatformSet (); 
 				}
-			
+			} else {
+				CreateObject (1); 
+				DownGround ();
 			}
 		}
 	}
-
-
-	void DownGround()
-	{
-		YBeforeDownSet = Coordinate.y;
-
-		for (DownSet = 1+Random.Range (1, Datas [0].Parts [RanParts].ObsList [RanList].DownSet)
-			; DownSet != 0; DownSet--) {
-
-			Coordinate -= new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
-			instgr ();
-		}
-
-		Coordinate = new Vector3 (Coordinate.x, YBeforeDownSet, -5);
-
-	}
-
-	void IfMax()
-	{
-		if (MaxCoord.y < Coordinate.y) {
-			MaxCoord = Coordinate;
-		}
-	}
-
-	void CreateObject(int up)
-	{
 		
-		if (Random.Range (0, 20) < 9) {
-			
-			RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Obs.Length);
-			RanZ = Random.Range ( 0,  4);
-			RanX = Random.Range (0.4f,  GroundRenderer.sprite.bounds.size.x - 0.4f);
 
-			if (up == 1)	ObjectCoordinate = new Vector3 (Coordinate.x + RanX, Coordinate.y - (1.1f*GroundRenderer.sprite.bounds.size.y), RanZ);
-			else ObjectCoordinate = new Vector3 (Coordinate.x + RanX, Coordinate.y - (0.5f*GroundRenderer.sprite.bounds.size.y), RanZ);
+	void InstaniatePlatformSet(){     ///функция генерации летающих платформ
+		float RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
+		Coordinate += new Vector3 (RanX, 2 * RanY, 4);
+		CreateObject (0);
+		InstantiateObs (GenObs.Ground, Coordinate);
+		Coordinate -= new Vector3 (RanX, 2 * RanY, 4);
+		CreateObject (1);
+		DownGround ();
+	}
+		
 
-			Obs [NumOfObjects] = Instantiate (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs, ObjectCoordinate, Quaternion.identity) as GameObject;
-			NumOfObjects++;
+	void InstantiateUpDown(){   ///функция генерации перепада высот
 
-			RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
-			RanZ = -5;
+		int UpDownRanInit = Datas [0].Parts [RanParts].UpDownRandom;
+		int RanUpDown = Random.Range (-UpDownRanInit, UpDownRanInit + 1);		//берем сдвиг высот
+		RanY = GroundRenderer.sprite.bounds.size.y * RanUpDown;		//превращаем в Y
+
+		if (RanUpDown > 1) {
+			for (; RanUpDown != 0; RanUpDown--) {
+				Coordinate += new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
+				FullGroundInstantiate (2, 0);
+			}
+		} else if (RanUpDown < -1) {
+			for (; RanUpDown != 0; RanUpDown++) {
+				Coordinate -= new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
+				FullGroundInstantiate (2, 0);
+			}
+		} else 
+			Coordinate += new Vector3 (0, RanY, 0);				//сдвигаем координаты
+	}
+		
+
+	void DownGround()     ///функция генерации нижнего слоя земли
+	{
+		float YBeforeDownSet = Coordinate.y;
+		for (DownSet = 1 + Random.Range (1, Datas [0].Parts [RanParts].DownSet); DownSet != 0; DownSet--) 
+		{
+			Coordinate -= new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
+			InstantiateObs (GenObs.Ground, Coordinate);
+		}
+		Coordinate = new Vector3 (Coordinate.x, YBeforeDownSet, 0);
+	}
+		
+
+	void CreateObject(int up)    ///функция генерации объектов
+	{
+		if (Random.Range (0, 100) < ChanceOfObject) {
+			int RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Obs.Length);
+
+			if (up == 1) {
+				float RanZ = Random.Range ( 1f,  Datas [0].Parts [RanParts].ObsList [RanList].Obs[RanObs].Z+1);
+
+				float RanX = Random.Range (0.4f,  GroundRenderer.sprite.bounds.size.x - 0.4f);
+
+				ObjectCoordinate = new Vector3 (Coordinate.x + RanX, Coordinate.y - (1.1f * GroundRenderer.sprite.bounds.size.y), RanZ);
+
+				if (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].OneOnIsland) {
+					if (!OnIsland [RanObs]) 
+					{
+						InstantiateObs (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs, ObjectCoordinate);
+						OnIsland [RanObs] = true;
+					}
+				} else
+					InstantiateObs (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs, ObjectCoordinate);
+				
+			} else { 
+				if (!Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].OneOnIsland) 
+				{
+					ObjectCoordinate = new Vector3 (Coordinate.x + (0.5f * GroundRenderer.sprite.bounds.size.x), 
+						Coordinate.y - (0.3f * GroundRenderer.sprite.bounds.size.y), Coordinate.z+0.01f);
+					
+					InstantiateObs (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs, ObjectCoordinate);
+				}
+			}
+			//RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
 		}
 	}
+		
 
-	void instgr(){
-		GB [NumOfGround] = Instantiate (Ground, Coordinate, Quaternion.identity) as GameObject;
-		if (NumOfGround + 1 < 8000)
-			NumOfGround++;
-		else NumOfGround = 0;
+	void InstantiateObs(GameObject path, Vector3 coord){    ///функция создания и присваивания родителя
+		GameObject Obs = Instantiate (path, coord, Quaternion.identity) as GameObject;
+
+		Obs.transform.SetParent (Island [IslandNum].transform);
+
+		if(Obs.GetComponent<EdgeChecker>())
+			Obs.GetComponent<EdgeChecker> ().XLvl = XLvl;
 	}
 
 
+	void CheckerInstantiate(int num){ // функция создания чекера
+		GameObject Obs;
+
+		if (num == 1) {
+			if (XLvl == 1) Obs = Instantiate (GenObs.LeftChecker, new Vector3 (Coordinate.x - 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
+			
+			else Obs = Instantiate (GenObs.RightChecker, new Vector3 (Coordinate.x - 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
+			
+		} else {
+			if (XLvl == 1) Obs = Instantiate (GenObs.RightChecker, new Vector3 (Coordinate.x + 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
+			
+			else Obs = Instantiate (GenObs.LeftChecker, new Vector3 (Coordinate.x + 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
+			
+		}
+		Obs.transform.SetParent (Island [IslandNum].transform);
+
+		if(Obs.GetComponent<EdgeChecker>())
+			Obs.GetComponent<EdgeChecker> ().XLvl = XLvl;
+
+	}
+
+
+	void CreateInTime(Vector3 Vect, int INum, int Rotate){
+		RanParts = Random.Range (0, Datas [0].Parts.Length);		//выбираем случайную часть
+		RanList = Random.Range (0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами
+
+		Coordinate = Vect;
+		Coordinate -= new Vector3 (5 * Rotate, 20, 0);
+
+		XLvl = Rotate;
+		IslandNum = INum;
+		IslandInstantiate ();
+	}
 }

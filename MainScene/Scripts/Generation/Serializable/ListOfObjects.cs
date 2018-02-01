@@ -4,9 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class ListOfObjects 
 {
-	public string ListName;
-	public Vector2 PartsSize_Max30Int;
-	public int NumOfObs, UpDownRandom, SetOfGround, DownSet;
-	public ObjectData[] Obs;
+	public string ListName = "List No. ";
+	public ObjectData[] Obs = new ObjectData[5];
 
 }

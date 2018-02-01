@@ -4,8 +4,10 @@ using UnityEngine;
 [System.Serializable]
 public class ListOfParts  
 {
-	public string PartName;
-	//public Vector2 LevelPercent_Max100Perc;
-	public int AmountSet;
-	public ListOfObjects[] ObsList;
+	public string PartName = "Part No. ";
+	[Range (5, 10)] public int AmountSet = 7;
+	[Range (6, 12)] public int SetOfGround = 8;
+	[Range (1, 5)] public int UpDownRandom = 3; 
+	[Range (1, 8)] public int DownSet = 5;
+	public ListOfObjects[] ObsList = new ListOfObjects[3];
 }
