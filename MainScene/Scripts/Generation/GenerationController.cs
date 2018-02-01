@@ -4,55 +4,48 @@ using UnityEngine;
 using UnityEngine.Sprites;
 
 public class GenerationController : MonoBehaviour {
-	public bool GenerationActive = true, Right, Precipices;
+	
+	public bool GenerationActive = true, Right = true , Precipices;
 	[Range (0, 100)] public int ChanceOfObject = 45;
 	bool[] OnIsland = new bool[50];
  
 	Vector3 Coordinate, ObjectCoordinate, LeftCoord, RightCoord;
 
-	float RanX, RanY;
+	float RanX, RanY, timer;
 	int RanList, RanParts;
 	int GroundSet , DownSet, AmountSet;
-	int XLvl=1;
+	public int XLvl=1, IslandNum;
 
 	ToolsForGeneration GenObs;
 	SpriteRenderer GroundRenderer;
 	ListOfLevels[] Datas ;
-	GameObject[] Island = new GameObject[15];
+	public GameObject[] Island = new GameObject[6];
 
 	void Start () {
+		Island [2] = GameObject.Find ("Island");
 		GenObs = GetComponent<ToolsForGeneration> ();
 		Datas = GetComponent<ObsForGeneration> ().Datas;
 		GroundRenderer = GenObs.Ground.GetComponent<SpriteRenderer> ();
-		if (GenerationActive == true) {
-			for (int LevelStage = Datas [0].Parts.Length; LevelStage != 0; LevelStage--) {	//считываем список частей
-
-				RanParts = Random.Range (0, Datas [0].Parts.Length);		//выбираем случайную часть
-				RanList = Random.Range (0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами	
-
-				Coordinate = new Vector3 (Coordinate.x, Coordinate.y, 0); // сдвигаем вперед
-				Coordinate -= new Vector3 (0, 20, 0);
-
-				LeftCoord = Coordinate;		//левый остров
-				RightCoord = Coordinate;	//правый остров
-
-				LeftCoord -= new Vector3 (Random.Range (0, 14), 0, 0);
-				RightCoord += new Vector3 (Random.Range (0, 14), 0, 0);
-
-				Coordinate = LeftCoord;
-				XLvl = -1;
-				IslandInstantiate ();	//левый остров
-				Coordinate = RightCoord;
-				XLvl = 1;
-				IslandInstantiate ();	//правый остров
+		RanParts = Random.Range (0, Datas [0].Parts.Length);		//выбираем случайную часть
+		RanList = Random.Range (0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами	
+	}
+	void FixedUpdate()
+	{
+		if (Island [2].GetComponent<IslandManage> ().ThisIslandActivate == true) {
+			if (Right == true) {
+				Cr (Island [2].GetComponent<IslandManage> ().RightChecker.position, 1, 1); 	//правый остров
+				Cr (Island [2].GetComponent<IslandManage> ().LeftChecker.position, 0, -1);	//левый остров
+			} else {
+				Cr (Island [2].GetComponent<IslandManage> ().LeftChecker.position, 0, 1);	//левый остров
+				Cr (Island [2].GetComponent<IslandManage> ().RightChecker.position, 1, -1); 	//правый остров*/
 			}
-			GenerationActive = false;
+			Island [2].GetComponent<IslandManage> ().ThisIslandActivate = false;
 		}
 	}
 
 	void IslandInstantiate() ///функция генерации острова
 	{
-		Island [0] = Instantiate (GenObs.Island, Coordinate, Quaternion.identity) as GameObject; // родитель остров
+		Island [IslandNum] = Instantiate (GenObs.Island, Coordinate, Quaternion.identity) as GameObject; // родитель остров
 		CheckerInstantiate (1); //чекер
 		// генерация нескольких сетов с перепадами высот
 		for (AmountSet = Random.Range (3, Datas [0].Parts [RanParts].AmountSet); AmountSet >= 0; AmountSet--) {
@@ -124,10 +117,7 @@ public class GenerationController : MonoBehaviour {
 	void DownGround()     ///функция генерации нижнего слоя земли
 	{
 		float YBeforeDownSet = Coordinate.y;
-
-		for (DownSet = 1+Random.Range (1, Datas [0].Parts [RanParts].DownSet)
-			; DownSet != 0; DownSet--) {
-
+		for (DownSet = 1 + Random.Range (1, Datas [0].Parts [RanParts].DownSet); DownSet != 0; DownSet--) {
 			Coordinate -= new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
 			InstantiateObs (GenObs.Ground, Coordinate);
 		}
@@ -163,16 +153,36 @@ public class GenerationController : MonoBehaviour {
 		
 	void InstantiateObs(GameObject path, Vector3 coord){    ///функция создания и присваивания родителя
 		GameObject Obs = Instantiate (path, coord, Quaternion.identity) as GameObject;
-		Obs.transform.SetParent (Island [0].transform);
+		Obs.transform.SetParent (Island [IslandNum].transform);
+		if(Obs.GetComponent<EdgeChecker>())
+			Obs.GetComponent<EdgeChecker> ().XLvl = XLvl;
 	}
 
 	void CheckerInstantiate(int num){ // функция создания чекера
+		GameObject Obs;
+		Vector3 Coord = new Vector3 (Coordinate.x + 5, Coordinate.y, Coordinate.z);
 		if (num == 1) {
-			if (XLvl == 1)  InstantiateObs (GenObs.LeftChecker, Coordinate);
-			else 			InstantiateObs (GenObs.RightChecker, Coordinate);
+			if (XLvl == 1) Obs = Instantiate (GenObs.LeftChecker, new Vector3 (Coordinate.x - 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
+			else Obs = Instantiate (GenObs.RightChecker, new Vector3 (Coordinate.x - 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
 		} else {
-			if (XLvl == 1) 	InstantiateObs (GenObs.RightChecker, Coordinate);
-			else 			InstantiateObs (GenObs.LeftChecker, Coordinate);
+			if (XLvl == 1) Obs = Instantiate (GenObs.RightChecker, new Vector3 (Coordinate.x + 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
+			else Obs = Instantiate (GenObs.LeftChecker, new Vector3 (Coordinate.x + 3 * XLvl, 
+				Coordinate.y, Coordinate.z), Quaternion.identity) as GameObject;
 		}
+		Obs.transform.SetParent (Island [IslandNum].transform);
+		if(Obs.GetComponent<EdgeChecker>())
+			Obs.GetComponent<EdgeChecker> ().XLvl = XLvl;
+
+	}
+
+	void Cr(Vector3 Vect, int INum, int Rotate){
+		Coordinate = Vect;
+		Coordinate -= new Vector3 (5 * Rotate, 15, 0);
+		XLvl = Rotate;
+		IslandNum = INum;
+		IslandInstantiate ();
 	}
 }
