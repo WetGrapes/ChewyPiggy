@@ -18,20 +18,19 @@ public class EdgeChecker : MonoBehaviour {
 	
 
 	void FixedUpdate () {
-		if (act)
+		if (act && Mathf.Abs (PigPos.y - transform.position.y) > 10f)
 			timer -= Time.deltaTime;
 		PigPos = Trans.GetComponent<PigTransformManagerScript> ().PigPos;
-		if (transform.parent.gameObject == Generator.Island [2]) {
+		if (transform.parent.gameObject == Generator.Island [2]) 
 			if (Mathf.Abs (PigPos.x - transform.position.x) < .5f) {
 				timer = 2f;
 				act = true;
-			}
-			if (timer<0){
 				Generator.Right = Right;
 				NewMainIsland ();
-				UnActIslands ();
-				Destroy (transform.gameObject);
 			}
+		if (timer<0){
+			UnActIslands ();
+			Destroy (transform.gameObject);
 		}
 	}
 
