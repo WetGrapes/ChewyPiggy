@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f498dede0a21add4a941945c6b217b8a
+timeCreated: 1517070497
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Ground: {fileID: 1674040023423782, guid: e66a708a198d53048bc1502bc9cad7dd, type: 2}
+  - Island: {fileID: 1834239492649702, guid: 985cfa39c3901044ebadd41fcefa2715, type: 2}
+  - LeftChecker: {fileID: 1559144331794682, guid: 7b2a8928e29b49e4f9a4c0735206e95c,
+      type: 2}
+  - RightChecker: {fileID: 1216027947557214, guid: 436b676d2404688458b056dcf6ca4977,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
