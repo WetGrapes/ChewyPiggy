@@ -14,7 +14,6 @@ public class EdgeChecker : MonoBehaviour {
 	void Start () {
 		Trans = GameObject.FindGameObjectWithTag ("PigTransformManager").GetComponent<PigTransformManagerScript> ();
 		Generator = GameObject.FindGameObjectWithTag ("GenerationManager").GetComponent<GenerationController> ();
-
 	}
 	
 
@@ -29,45 +28,51 @@ public class EdgeChecker : MonoBehaviour {
 			}
 			if (timer<0){
 				Generator.Right = Right;
-				Generator.Island [5] = Generator.Island [2];
-				Generator.Island [4] = Generator.Island [1];
-				Generator.Island [3] = Generator.Island [0];
-
-				if (XLvl == 1) {
-					if (Right == true)
-						Generator.Island [2] = Generator.Island [1];
-					else
-						Generator.Island [2] = Generator.Island [0];
-				} else {
-					Generator.XLvl = 1;
-					if (Right == true)
-						Generator.Island [2] = Generator.Island [0];
-					else
-						Generator.Island [2] = Generator.Island [1];	
-				}
-				Generator.GenerationActive = true;
-				GameObject[] delete = new GameObject[3];
-
-
-				if (Generator.Island [2] != Generator.Island [3]) {
-					delete [0] = Generator.Island [3];
-					Generator.Island [3] = GameObject.FindGameObjectWithTag ("GenerationManager");
-					delete [0].SetActive (false);
-				} else
-					Generator.Island [3] = GameObject.FindGameObjectWithTag ("GenerationManager");
-				if (Generator.Island [2] != Generator.Island [4]) {
-					delete [1] = Generator.Island [4];
-					Generator.Island [4] = GameObject.FindGameObjectWithTag ("GenerationManager");
-					delete [1].SetActive (false);
-				} else
-					Generator.Island [4] = GameObject.FindGameObjectWithTag ("GenerationManager");
-
-				delete [2] = Generator.Island [5];
-				Generator.Island [5] = GameObject.FindGameObjectWithTag ("GenerationManager");
-				delete [2].SetActive (false);
-
+				NewMainIsland ();
+				UnActIslands ();
 				Destroy (transform.gameObject);
 			}
 		}
+	}
+
+	void NewMainIsland(){
+		Generator.Island [5] = Generator.Island [2];
+		Generator.Island [4] = Generator.Island [1];
+		Generator.Island [3] = Generator.Island [0];
+
+		if (XLvl == 1) {
+			if (Right == true)
+				Generator.Island [2] = Generator.Island [1];
+			else
+				Generator.Island [2] = Generator.Island [0];
+		} else {
+			Generator.XLvl = 1;
+			if (Right == true)
+				Generator.Island [2] = Generator.Island [0];
+			else
+				Generator.Island [2] = Generator.Island [1];	
+		}
+	}
+
+	void UnActIslands()
+	{
+		GameObject[] delete = new GameObject[3];
+
+		if (Generator.Island [2] != Generator.Island [3]) {
+			delete [0] = Generator.Island [3];
+			Generator.Island [3] = GameObject.FindGameObjectWithTag ("GenerationManager");
+			delete [0].SetActive (false);
+		} else
+			Generator.Island [3] = GameObject.FindGameObjectWithTag ("GenerationManager");
+		if (Generator.Island [2] != Generator.Island [4]) {
+			delete [1] = Generator.Island [4];
+			Generator.Island [4] = GameObject.FindGameObjectWithTag ("GenerationManager");
+			delete [1].SetActive (false);
+		} else
+			Generator.Island [4] = GameObject.FindGameObjectWithTag ("GenerationManager");
+
+		delete [2] = Generator.Island [5];
+		Generator.Island [5] = GameObject.FindGameObjectWithTag ("GenerationManager");
+		delete [2].SetActive (false);
 	}
 }

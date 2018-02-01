@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HideOutsideCamera : MonoBehaviour {
 
-	/*CameraManage CamManager;
+	CameraManage CamManager;
 	Camera Cam;
 	void Start () {
 		CamManager = GameObject.FindGameObjectWithTag ("Camera").GetComponent<CameraManage> ();
@@ -20,5 +20,5 @@ public class HideOutsideCamera : MonoBehaviour {
 			transform.GetComponent<SpriteRenderer> ().enabled = false;
 		else
 			transform.GetComponent<SpriteRenderer> ().enabled = true;
-	}*/
+	}
 }
