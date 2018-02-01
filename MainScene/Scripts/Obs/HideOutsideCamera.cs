@@ -14,9 +14,9 @@ public class HideOutsideCamera : MonoBehaviour {
 
 	void FixedUpdate () {
 		if (Mathf.Abs (transform.position.x - CamManager.ThisCamTransform.position.x) >
-			Cam.orthographicSize * 2 + 2 || 
+			Cam.orthographicSize * 2 + 5 || 
 			Mathf.Abs (transform.position.y - CamManager.ThisCamTransform.position.y) >
-			Cam.orthographicSize * 2 + 2)
+			Cam.orthographicSize * 2 + 5)
 			transform.GetComponent<SpriteRenderer> ().enabled = false;
 		else
 			transform.GetComponent<SpriteRenderer> ().enabled = true;

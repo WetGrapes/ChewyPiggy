@@ -10,11 +10,10 @@ public class GenerationController : MonoBehaviour {
 	public int XLvl=1;
 
 
-	float RanX, RanY, timer;
+	float RanY, timer;
 	int RanList, RanParts;
 	int GroundSet , DownSet, AmountSet, IslandNum;
 	bool[] OnIsland = new bool[50];
-
 
 	Vector3 Coordinate, ObjectCoordinate;
 	ToolsForGeneration GenObs;
@@ -74,7 +73,7 @@ public class GenerationController : MonoBehaviour {
 
 		for (GroundSet = Random.Range (1, SetOfGround); GroundSet != 0; GroundSet--) {
 
-			RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
+			float RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
 			Coordinate += new Vector3 (RanX, 0, 0);
 
 			if ((Chance > ChanceOfPanel - (ChanceOfPanel / 2)) && ChanceOfPanel != 0) {
@@ -95,7 +94,7 @@ public class GenerationController : MonoBehaviour {
 		
 
 	void InstaniatePlatformSet(){     ///функция генерации летающих платформ
-		
+		float RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
 		Coordinate += new Vector3 (RanX, 2 * RanY, 4);
 		CreateObject (0);
 		InstantiateObs (GenObs.Ground, Coordinate);
@@ -146,7 +145,7 @@ public class GenerationController : MonoBehaviour {
 			if (up == 1) {
 				float RanZ = Random.Range ( 1f,  Datas [0].Parts [RanParts].ObsList [RanList].Obs[RanObs].Z+1);
 
-				RanX = Random.Range (0.4f,  GroundRenderer.sprite.bounds.size.x - 0.4f);
+				float RanX = Random.Range (0.4f,  GroundRenderer.sprite.bounds.size.x - 0.4f);
 
 				ObjectCoordinate = new Vector3 (Coordinate.x + RanX, Coordinate.y - (1.1f * GroundRenderer.sprite.bounds.size.y), RanZ);
 
@@ -168,7 +167,7 @@ public class GenerationController : MonoBehaviour {
 					InstantiateObs (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs, ObjectCoordinate);
 				}
 			}
-			RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
+			//RanX = XLvl * GroundRenderer.sprite.bounds.size.x;
 		}
 	}
 		
@@ -214,7 +213,7 @@ public class GenerationController : MonoBehaviour {
 		RanList = Random.Range (0, Datas [0].Parts [RanParts].ObsList.Length);	//Выбираем случайный лист с объектами
 
 		Coordinate = Vect;
-		Coordinate -= new Vector3 (5 * Rotate, 15, 0);
+		Coordinate -= new Vector3 (5 * Rotate, 20, 0);
 
 		XLvl = Rotate;
 		IslandNum = INum;
