@@ -12,9 +12,6 @@ public class SpriteList : MonoBehaviour {
 	public Sprite[] sprites = new Sprite[size];
 	public SpriteRenderer sp; 
 
- 
-
-
 	void Update() {
 		sp = GetComponent<SpriteRenderer> ();
 		sp.sprite = sprites [number];	
