@@ -7,7 +7,7 @@ public class EdgeChecker : MonoBehaviour {
 	GenerationController Generator;
 	Vector2 PigPos;
 	public int XLvl;
-	[SerializeField] private bool Right;
+	[SerializeField] private bool Right = false;
 	float timer;
 	bool act;
 
@@ -22,14 +22,15 @@ public class EdgeChecker : MonoBehaviour {
 			timer -= Time.deltaTime;
 		PigPos = Trans.GetComponent<PigTransformManagerScript> ().PigPos;
 		if (transform.parent.gameObject == Generator.Island [2]) 
-			if (Mathf.Abs (PigPos.x - transform.position.x) < .5f) {
+		if ((Mathf.Abs (PigPos.x - transform.position.x) < 1f) 
+			|| (Mathf.Abs (PigPos.x - transform.position.x) < 4f) && PigPos.y - transform.position.y < -5f) {
 				timer = 2f;
 				act = true;
 				Generator.Right = Right;
 				NewMainIsland ();
 			}
 		if (timer<0){
-			UnActIslands ();
+			//UnActIslands ();
 			Destroy (transform.gameObject);
 		}
 	}
@@ -74,4 +75,6 @@ public class EdgeChecker : MonoBehaviour {
 		Generator.Island [5] = GameObject.FindGameObjectWithTag ("GenerationManager");
 		delete [2].SetActive (false);
 	}
+
+
 }

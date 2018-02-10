@@ -16,6 +16,7 @@ public class IslandController : MonoBehaviour {
 			m.LeftChecker = transform.GetChild (0).gameObject.GetComponent<Transform> ().transform;
 			m.RightChecker = transform.GetChild (transform.childCount - 1).gameObject.GetComponent<Transform> ().transform;
 			m.ThisIslandActivate = true;
+			m.TimeToDie = 5f;
 			Destroy (this);
 		}
 	}

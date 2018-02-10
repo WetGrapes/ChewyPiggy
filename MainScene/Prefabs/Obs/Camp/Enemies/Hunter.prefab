@@ -285,7 +285,7 @@ MonoBehaviour:
   rotate: 0
   speed: 2
   bulletSpeed: 8
-  shotTime: 1
+  shotTime: 2
   eyesight: 8
   target: {fileID: 0}
   childTransBullet: {fileID: 0}

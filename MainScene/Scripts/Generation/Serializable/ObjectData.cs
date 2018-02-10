@@ -4,8 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectData  
 {
-	public GameObject Obs;
-	[Range (1, 7)] public int Z;
+	[Range (0, 20)] public int Obs;
 	[Range (0, 2)] public int Size;
 	public bool OneOnIsland;
 }

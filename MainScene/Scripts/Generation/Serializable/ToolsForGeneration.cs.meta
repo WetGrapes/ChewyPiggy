@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f498dede0a21add4a941945c6b217b8a
-timeCreated: 1517070497
+timeCreated: 1517583847
 licenseType: Free
 MonoImporter:
   externalObjects: {}
@@ -12,6 +12,7 @@ MonoImporter:
       type: 2}
   - RightChecker: {fileID: 1216027947557214, guid: 436b676d2404688458b056dcf6ca4977,
       type: 2}
+  - Burger: {fileID: 1133237580012426, guid: 9a0eee6b94fc3d94b8a9c327bbd36526, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

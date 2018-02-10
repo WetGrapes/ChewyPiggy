@@ -6,7 +6,7 @@ public class CameraManage : MonoBehaviour {
 	public Transform ThisCamTransform;
 	public Transform target;
 	PigTransformManagerScript Trans;
-	public float damping = 1, lookAheadFactor = 3, lookAheadReturnSpeed = 0.5f, lookAheadMoveThreshold = 0.05f;
+	public float damping = 1, lookAheadFactor = 3, lookAheadReturnSpeed = 0.5f, lookAheadMoveThreshold = 0;
 	float offsetZ;
 	Vector3 lastTargetPosition;
 	Vector3 currentVelocity;
@@ -33,6 +33,11 @@ public class CameraManage : MonoBehaviour {
 					else
 						lookAheadFactor = 0;
 				}
+				if (Mathf.Abs ((transform.position - target.position).y) > 3)
+					transform.position -= new Vector3 (0, 
+						Time.deltaTime * Mathf.Sign ((transform.position - target.position).y)*
+						Mathf.Abs ((transform.position - target.position).y)*2, 0);
+
 			} else 
 				Debug.Log ("CameraManage Transform Manager not found");
 			

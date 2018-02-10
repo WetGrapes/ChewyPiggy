@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class InterfaceManagerScript : MonoBehaviour {
 	public GameObject CanvasOb;
-	public bool CanvasObTrue;
+	[System.NonSerialized] public bool CanvasObTrue;
+	[Space]
 	public GameObject DoubleJump;
 	public int DoubleJumpQuantity;
-	public bool DoubleJumpTrue;
+	[System.NonSerialized] public bool DoubleJumpTrue;
+	[Space]
 	public GameObject LifeTime;
 	public float LifeTimeNow;
-	public bool LifeTimeTrue;
+	[System.NonSerialized] public bool LifeTimeTrue;
+	[Space]
 	public GameObject GameOver;
-	public bool GameOverTrue;
+	[System.NonSerialized] public bool GameOverTrue;
+	[Space]
+	public GameObject DownSight;
+	[System.NonSerialized] public bool DownSightTrue;
+	[System.NonSerialized] public bool DownSightCan;
+	[System.NonSerialized] public float DownSightTimer;
 
-	// Use this for initialization
+
+
 	void Start () {
 		CanvasObTrue = true;
 		CanvasOb.SetActive (CanvasObTrue);
@@ -24,22 +33,32 @@ public class InterfaceManagerScript : MonoBehaviour {
 		LifeTime.SetActive (LifeTimeTrue);
 		GameOverTrue = false;
 		GameOver.SetActive (GameOverTrue);
+		DownSightTrue = false;
+		DownSight.SetActive (DownSightTrue);
 	}
 	
-	// Update is called once per frame
+	void Update(){
+		DownSightAct ();
+	}
 	void FixedUpdate () {
-		if (DoubleJumpTrue) {
-			DoubleJump.SetActive (DoubleJumpTrue);
-			DoubleJumpTrue = false;
-		}
-		if (LifeTimeTrue) {
-			LifeTime.SetActive (LifeTimeTrue);
-			LifeTimeTrue = false;
-		}
-		if (GameOverTrue) {
-			GameOver.SetActive (GameOverTrue);
-			GameOverTrue = false;
-		}
+		DoubleJump.SetActive (DoubleJumpTrue);
+		LifeTime.SetActive (LifeTimeTrue);
+		GameOver.SetActive (GameOverTrue);
 
+
+	}
+		
+
+
+
+	void DownSightAct(){
+		if (DownSightCan) {
+			if (DownSightTimer >= 0)
+				DownSightTimer -= Time.fixedDeltaTime;
+			else
+				DownSight.SetActive (DownSightTrue);
+		} else {
+			DownSightTimer = 1f;
+		}
 	}
 }

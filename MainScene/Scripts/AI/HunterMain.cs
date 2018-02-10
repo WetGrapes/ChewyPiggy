@@ -8,12 +8,12 @@ public class HunterMain : MonoBehaviour {
 	[SerializeField] private int rotate = 0;
 	[SerializeField] private float speed = 0;
 	public float bulletSpeed;
-	public float shotTime = 1f;
+	public float shotTime = 2f;
 	[SerializeField] private float eyesight = 8f;
 	[SerializeField] private GameObject target = null;
 	int Xvect = 1;
 	public Transform childTransBullet, childTransFire;
-	float shotTimeStart;
+	float shotTimeStart, timer;
 	CameraManage CamManager;
 
 	void Start () {
@@ -47,9 +47,12 @@ public class HunterMain : MonoBehaviour {
 		if (h.collider != null) {  //если есть столкновение по направлению взгляда
 			if (h.collider.tag != "Ground") { // если столкновение не с землей
 				target = h.collider.gameObject; //цель - столкновение
-				if (shotTime < 0.5f) { // если до стрельбы меньше 0,5f 
-					if (target.name == "Piggy") { // и если цель Piggy
-						if (shotTime <= 0) {  // если время до стрельбы меньше нуля
+				if (shotTime < 0.5f)  // если до стрельбы меньше 0,5f 
+				{
+					if (target.name == "Piggy")  // и если цель Piggy
+					{
+						if (shotTime <= 0)   // если время до стрельбы меньше нуля
+						{	
 							if (Mathf.Abs ((h.collider.transform.position - transform.position).x) < eyesight - (eyesight / 3)) {
 								childTransFire = TransChildAndAct (2); // активировать огонь
 								childTransBullet = TransChildAndAct (3); // активировать пулю
@@ -57,23 +60,42 @@ public class HunterMain : MonoBehaviour {
 							} else if (Mathf.Abs ((h.collider.transform.position - transform.position).x) < eyesight - (eyesight / 6)) 
 								// если расстояние между столкновением и позицией стрелка меньше взгляда
 								Move (); // то двигаться дальше 
+							
 							target = null; // сброс цели
 						}
-					} else if (target.name == "Trap") Move (); //переделать
-					  else Move (); // если цель не Piggy и не капкан, то двигаться дальше 
-				} else target = null; // если до стрельбы больше 0,5f
-			} else {  // если столкновение с землей
+					} 
+					else if (target.name == "Trap")
+						Move (); //переделать
+					else 
+					{
+						Move (); // если цель не Piggy и не капкан, то двигаться дальше 
+						shotTime = shotTimeStart;
+					}
+				} else 
+					target = null; // если до стрельбы больше 0,5f
+			} 
+			else 
+			{  // если столкновение с землей
 				Move ();// то двигаться дальше 
 				if (Mathf.Abs ((h.collider.transform.position - transform.position).x) < 2f) Expand (); // если расстояние меньше двух, то развернуть
 			}
-		} else Move(); // если нет столкновения по направлению взгляда, то двигаться дальше 
+		} 
+		else 
+			Move(); // если нет столкновения по направлению взгляда, то двигаться дальше 
 		
-		if (h2.collider != null) { // если сзади есть столкновение
+		if (h2.collider != null)  // если сзади есть столкновение
+		{
 			if (Mathf.Abs ((h2.collider.gameObject.transform.position - transform.position).x) < eyesight
-				&& h2.collider.gameObject.name == "Piggy") { 
+			    && h2.collider.gameObject.name == "Piggy") 
+			{ 
 				//  если расстояние между столкновением и позицией охотника меньше взгляда и столкновение с Piggy
-				Expand (); // разворот
+				if(timer>=0)
+					timer-=Time.deltaTime;
+				else
+					Expand (); // разворот
 			}
+		} else {
+			timer = 1f;
 		}
 	}
 

@@ -8,4 +8,5 @@ public class ToolsForGeneration : MonoBehaviour {
 	public GameObject Island;
 	public GameObject LeftChecker;
 	public GameObject RightChecker;
+	public GameObject Burger;
 }

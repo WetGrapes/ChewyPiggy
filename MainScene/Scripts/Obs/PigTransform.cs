@@ -5,67 +5,93 @@ using UnityEngine;
 public class PigTransform : MonoBehaviour {
 	PigTransformManagerScript Trans;
 	Rigidbody2D Body;
-	float Xsize, Xvect;
-	Ray2D ray;
+	float  Xvect , MaximalSpeed = 8f;
+	bool PreviousUpdateLeft = false, PreviousUpdateRight = false;
+
 	[SerializeField] private GameObject Checker;
 	[SerializeField] private LayerMask isGround;
+
 	void Start () {
 		Trans = GameObject.FindGameObjectWithTag ("PigTransformManager").GetComponent<PigTransformManagerScript> ();
 		Body = GetComponent<Rigidbody2D> ();
-
-		Xsize = 1;//GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
-	//	Ysize = 1;//GetComponent<SpriteRenderer> ().sprite.bounds.size.y;
+		if(Trans == null)
+			Debug.Log ("PigTransform - Transform Manager not found");
 	}
 	void Update () {
 		if (Trans != null) {
-			
-			transform.localRotation = Quaternion.AngleAxis (Trans.rotate, Vector3.up);
-		
-			transform.Translate (Vector3.right * Trans.speed * Time.deltaTime);
-			if (Trans.left == true || Trans.right == true) {
-				if (Trans.speed <= 8)
-					Trans.speed += Time.deltaTime * 5;
-			} else {
-				if (Trans.speed >= 0.4f)
-					Trans.speed -= Time.deltaTime * 8;
-				else
-					Trans.speed = -0.001f;	
-			}
+			SpeedDinamic ();
+			AllJump ();
+		} 
+	}
 
 
-			if (Trans.right)
-				Xvect = 1;
-			else if (Trans.left)
-				Xvect = -1;
-
-			if (Physics2D.OverlapCircle (Checker.transform.position, 0.2f, isGround)) {
-				ray = new Ray2D (new Vector2 (transform.position.x + Xsize * Xvect, transform.position.y - 0.3f), new Vector2 (Xvect, 0f));
-				//Debug.DrawRay (ray.origin, ray.direction);
-				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 1.5f);
-				if (hit.collider != null) {
-					if (Trans.speed > 2f) {
-						if (hit.collider.tag == "Ground")
-							Body.AddRelativeForce (transform.up * 7 * Trans.force);
-						if (hit.collider.tag == "Enemies") {
-							Body.AddRelativeForce (transform.up * 18 * Trans.force);
-							Body.AddRelativeForce (transform.right * 6/Trans.speed *   Trans.force);
-						}
-					}
-				}
-				
-
-				///место для прыжков
-				//Trans.forceTrue = false;
-			}
+	void FixedUpdate(){
+		AnimatorSwitch ();
+	}
 
 
-		} else
-			Debug.Log ("PigTransform Transform Manager not found");
+	void LateUpdate(){
+		SpeedAfterPiggyRotate ();
 	}
 
 
 
-	void FixedUpdate(){
+
+
+	void SpeedDinamic(){  //динамика набора скорости
+		
+		transform.Translate (Vector3.right * Trans.speed * Time.deltaTime);// Изменение координат
+
+		if (Trans.left == true || Trans.right == true) {
+			if (Trans.speed <= MaximalSpeed)
+				Trans.speed += Time.deltaTime * (MaximalSpeed-Trans.speed);
+		} else {
+			if (Trans.speed >= 0.4f)
+				Trans.speed -= Time.deltaTime * (MaximalSpeed-Trans.speed/3);
+			else
+				Trans.speed = -0.001f;	
+		}
+
+	}
+
+
+
+
+
+	void AllJump(){  //прыжки
+		if (Physics2D.OverlapCircle (Checker.transform.position, 0.1f, isGround)) 
+		{
+			AutoJump ();
+			StandartJump ();
+		}
+	}
+
+	void AutoJump(){  // прыжок при приближение к высоте
+		
+		RotateRay ();
+		Ray2D ray = new Ray2D (new Vector2 (transform.position.x + Xvect, transform.position.y - 0.3f), new Vector2 (Xvect, 0f));
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 0.5f);
+	
+		if (hit.collider != null)
+		if (hit.collider.tag == "Ground") {
+			if (Trans.speed < 0.5f) {
+				transform.Translate (Vector3.right * -(Trans.speed+0.1f) * Time.deltaTime);
+			}
+			if (Trans.speed > 2.5f)
+				Body.AddRelativeForce (transform.up * Trans.force);
+			if (Trans.speed > 6f)
+				Trans.speed -= Time.deltaTime * (MaximalSpeed-Trans.speed);
+
+		}
+	}
+
+
+	void StandartJump(){
+	}
+	
+
+
+	void AnimatorSwitch(){  //анимация, зависящая от скорости
 		if (Trans != null) {
 			if (Trans.speed <= 0.5f) {
 				if (Trans.speed >= 0.1f)
@@ -80,10 +106,25 @@ public class PigTransform : MonoBehaviour {
 			}
 		}
 	}
-
-
-	void OnMouseDown(){
 		
 
+
+	void RotateRay(){  //поворот луча
+		transform.localRotation = Quaternion.AngleAxis (Trans.rotate, Vector3.up);
+		if (Trans.right)
+			Xvect = 1;
+		else if (Trans.left) 
+			Xvect = -1;
 	}
+
+	void SpeedAfterPiggyRotate(){
+		if (PreviousUpdateLeft != Trans.left || PreviousUpdateRight != Trans.right) {
+			PreviousUpdateLeft = Trans.left;
+			PreviousUpdateRight = Trans.right;
+			if (Trans.speed >= 4) {
+				Trans.speed -= Trans.speed / (Trans.speed / 4);
+			}
+		}
+	}
+
 }
