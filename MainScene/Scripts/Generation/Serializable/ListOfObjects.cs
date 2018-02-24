@@ -4,7 +4,12 @@ using UnityEngine;
 [System.Serializable]
 public class ListOfObjects 
 {
-	public string ListName = "List No. ";
-	public ObjectData[] Obs = new ObjectData[5];
+	[Header("Список из объектов")]
+	[Space]
+	public EnemiesData[] Enemies = new EnemiesData[2];
+	[Space]
+	public ObsData[] Obs = new ObsData[4];
+	[Space]
+	public TreesData[] Trees = new TreesData[5];
 
 }

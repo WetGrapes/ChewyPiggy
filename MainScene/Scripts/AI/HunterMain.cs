@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HunterMain : MonoBehaviour {
 
-	[SerializeField] private int[] priority = new int[4];
 	[SerializeField] private int rotate = 0;
 	[SerializeField] private float speed = 0;
 	public float bulletSpeed;

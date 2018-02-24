@@ -8,8 +8,8 @@ public class PigTransform : MonoBehaviour {
 	float  Xvect , MaximalSpeed = 8f;
 	bool PreviousUpdateLeft = false, PreviousUpdateRight = false;
 
-	[SerializeField] private GameObject Checker;
-	[SerializeField] private LayerMask isGround;
+	[SerializeField] private GameObject Checker = null;
+	[SerializeField] private LayerMask isGround = new LayerMask();
 
 	void Start () {
 		Trans = GameObject.FindGameObjectWithTag ("PigTransformManager").GetComponent<PigTransformManagerScript> ();

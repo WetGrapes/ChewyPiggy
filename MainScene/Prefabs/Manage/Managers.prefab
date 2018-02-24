@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4384688700814196}
   - component: {fileID: 114881308383645782}
   - component: {fileID: 114303086885939228}
+  - component: {fileID: 114390807362400356}
   - component: {fileID: 114271916757037224}
   - component: {fileID: 212913696672338290}
   m_Layer: 0
@@ -61,15 +62,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1712274372053830
+--- !u!1 &1685315752630034
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4377783699153800}
-  - component: {fileID: 114386201499041144}
+  - component: {fileID: 4998097108108302}
+  - component: {fileID: 114965711713854708}
+  m_Layer: 0
+  m_Name: LifeTimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1900453684347004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4584401234063582}
+  - component: {fileID: 114900011661588260}
   m_Layer: 0
   m_Name: InterfaceManager
   m_TagString: InterfaceManager
@@ -77,19 +94,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4377783699153800
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1712274372053830}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4399153062487608}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4384688700814196
 Transform:
   m_ObjectHideFlags: 1
@@ -115,9 +119,23 @@ Transform:
   m_Children:
   - {fileID: 4384688700814196}
   - {fileID: 4767430254783208}
-  - {fileID: 4377783699153800}
+  - {fileID: 4584401234063582}
+  - {fileID: 4998097108108302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4584401234063582
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1900453684347004}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4399153062487608}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4767430254783208
 Transform:
@@ -131,6 +149,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4399153062487608}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4998097108108302
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685315752630034}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.966173, y: 25.235416, z: 0.015122832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4399153062487608}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114271916757037224
 MonoBehaviour:
@@ -154,37 +185,30 @@ MonoBehaviour:
       DownSet: 5
       ObsList:
       - ListName: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043B\u0438\u0441\u0442"
-        Obs:
-        - Obs: {fileID: 0}
-          Z: 7
+        Enemies:
+        - Obs: 0
           OneOnIsland: 1
-        - Obs: {fileID: 0}
-          Z: 7
+        - Obs: 1
+          OneOnIsland: 1
+        Obs:
+        - Obs: 0
+          Size: 1
+          OneOnIsland: 1
+        - Obs: 1
+          Size: 1
+          OneOnIsland: 1
+        - Obs: 2
+          Size: 4
+          OneOnIsland: 1
+        - Obs: 3
+          Size: 1
           OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
-        - Obs: {fileID: 0}
-          Z: 7
-          OneOnIsland: 0
+        Trees:
+        - Obs: 0
+        - Obs: 1
+        - Obs: 2
+        - Obs: 3
+        - Obs: 4
 --- !u!114 &114303086885939228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,27 +226,42 @@ MonoBehaviour:
     type: 2}
   RightChecker: {fileID: 1216027947557214, guid: 436b676d2404688458b056dcf6ca4977,
     type: 2}
---- !u!114 &114386201499041144
+  Burger: {fileID: 1133237580012426, guid: 9a0eee6b94fc3d94b8a9c327bbd36526, type: 2}
+--- !u!114 &114390807362400356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1712274372053830}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1057700830108026}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad06d318c66750242bd5fbe81b0ac5d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b37f048708173d439711c5cb24a4d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasOb: {fileID: 0}
-  CanvasObTrue: 1
-  DoubleJump: {fileID: 0}
-  DoubleJumpQuantity: 5
-  DoubleJumpTrue: 0
-  LifeTime: {fileID: 0}
-  LifeTimeNow: 60
-  LifeTimeTrue: 0
-  GameOver: {fileID: 0}
-  GameOverTrue: 0
+  paths:
+  - Enemies
+  - OtherObs
+  - Trees
+  Enemies: 0
+  Obs: 0
+  Trees: 0
+  EnemiesAd:
+  - {fileID: 0}
+  - {fileID: 0}
+  ObsAd:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  TreesAd:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114660981839744406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,9 +280,13 @@ MonoBehaviour:
   right: 0
   forceTrue: 0
   grounded: 0
-  force: 100
+  downSight: 0
+  TwoTaps: 0
+  StartG: 0
+  force: 1400
   speed: -0.001
   rotate: 180
+  timer: 0
 --- !u!114 &114881308383645782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,10 +298,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e737267c3a25843b4f99a5365c15e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GenerationActive: 1
-  Right: 0
+  Right: 1
   Precipices: 0
-  ChanceOfObject: 45
+  ChanceOfObject: 100
+  XLvl: 1
+  Island:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &114900011661588260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1900453684347004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad06d318c66750242bd5fbe81b0ac5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanvasOb: {fileID: 0}
+  LifeTimeNow: 60
+  Clock: {fileID: 0}
+  Accountant: {fileID: 0}
+  Abilities: {fileID: 0}
+  DoubleJump: {fileID: 0}
+  SuperPig: {fileID: 0}
+  Snack: {fileID: 0}
+  Compass: {fileID: 0}
+  Pause: {fileID: 0}
+  Background: {fileID: 0}
+  RUN: {fileID: 0}
+  Relax: {fileID: 0}
+  StartGame: {fileID: 0}
+  GameOver: {fileID: 0}
+  DownSight: {fileID: 0}
+--- !u!114 &114965711713854708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685315752630034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f49ba28d8467ab418e1b64f421d78f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212913696672338290
 SpriteRenderer:
   m_ObjectHideFlags: 1

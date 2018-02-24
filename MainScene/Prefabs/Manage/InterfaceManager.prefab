@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1766784388419858}
+  m_IsPrefabParent: 1
+--- !u!1 &1766784388419858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4817209081142860}
+  - component: {fileID: 114016589124378964}
+  m_Layer: 0
+  m_Name: InterfaceManager
+  m_TagString: InterfaceManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4817209081142860
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1766784388419858}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114016589124378964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1766784388419858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad06d318c66750242bd5fbe81b0ac5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanvasOb: {fileID: 1180503246849336, guid: e7b6e62ae4c65d544af54a2cb4bb39c1, type: 2}
+  LifeTimeNow: 60
+  Clock: {fileID: 1278955144049308, guid: 74a2edce38297c64a879440658dab0c2, type: 2}
+  Accountant: {fileID: 0}
+  Abilities: {fileID: 0}
+  DoubleJump: {fileID: 1933037037682236, guid: 32c3e2e87c451d341878ed8ec94e6b3a, type: 2}
+  SuperPig: {fileID: 0}
+  Snack: {fileID: 0}
+  Compass: {fileID: 0}
+  Pause: {fileID: 0}
+  Background: {fileID: 0}
+  RUN: {fileID: 0}
+  Relax: {fileID: 0}
+  StartGame: {fileID: 0}
+  GameOver: {fileID: 1210350808738424, guid: bfe9e9c985539c241b3c5ffe197207d2, type: 2}
+  DownSight: {fileID: 1130169134491808, guid: 34c5a463be348a445a6a7e3a2390e51a, type: 2}

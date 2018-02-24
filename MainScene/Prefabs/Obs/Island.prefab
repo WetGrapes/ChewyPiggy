@@ -55,6 +55,8 @@ MonoBehaviour:
   LeftChecker: {fileID: 0}
   RightChecker: {fileID: 0}
   ThisIslandActivate: 0
+  ReadyForSleep: 0
+  TimeToDie: 0
 --- !u!114 &114484762333075744
 MonoBehaviour:
   m_ObjectHideFlags: 1

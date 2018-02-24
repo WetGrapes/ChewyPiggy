@@ -14,25 +14,26 @@ public class ClickDetecter : MonoBehaviour {
 		
 	}
 	void OnMouseDrag() {
-		if (Input.touchCount == 1 || Input.touchCount == 0) 
-		{
-			if (Input.mousePosition.x < Render.size.x * Screen.width / 2) {
-				Trans.left = true;
-				Trans.right = false;
-				Trans.rotate = 180;
-			} else {
-				Trans.right = true;
-				Trans.left = false;
-				Trans.rotate = 0;
+		if (Trans.StartG == false) {
+			if (Input.touchCount == 1 || Input.touchCount == 0) {
+				if (Input.mousePosition.x < Render.size.x * Screen.width / 2) {
+					Trans.left = true;
+					Trans.right = false;
+					Trans.rotate = 180;
+				} else {
+					Trans.right = true;
+					Trans.left = false;
+					Trans.rotate = 0;
+				}
 			}
-		}
 
-		if (Input.touchCount == 2)
-			Trans.TwoTaps = true;
-		else
-			Trans.TwoTaps = false;
+			if (Input.touchCount == 2)
+				Trans.TwoTaps = true;
+			else
+				Trans.TwoTaps = false;
 		
-		Trans.forceTrue = true;
+			Trans.forceTrue = true;
+		}
 	}
 	void OnMouseUp(){
 		Trans.left = false;

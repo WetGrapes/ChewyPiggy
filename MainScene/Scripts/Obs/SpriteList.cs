@@ -6,9 +6,9 @@ using UnityEngine.Sprites;
 
 public class SpriteList : MonoBehaviour {
 	
-	public int number;
-	public Sprite[] sprites; 
-	public SpriteRenderer sp; 
+	[System.NonSerialized] public int number;
+	[SerializeField] Sprite[] sprites = new Sprite[0]; 
+	SpriteRenderer sp; 
 
 	void Start(){
 		number = Random.Range (0, sprites.Length);

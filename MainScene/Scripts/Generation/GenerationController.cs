@@ -5,26 +5,30 @@ using UnityEngine.Sprites;
 
 public class GenerationController : MonoBehaviour {
 	
-	public bool Right , Precipices;
+	[System.NonSerialized] public bool Right = true ; 
+	public bool Precipices;
 	[Range (0, 100)] public int ChanceOfObject = 45;
-	public int XLvl=1;
+	[System.NonSerialized] public int XLvl=1;
 
 	int RanParts, IslandNum, ThisSet, ToEnd;
-	bool[] OnIsland = new bool[50];
+	bool[] OnIslandEnemies = new bool[8];
+	bool[] OnIslandObs = new bool[8];
 
 	Vector3 Coordinate;
 	ToolsForGeneration GenObs;
 	SpriteRenderer GroundRenderer;
 	ListOfLevels[] Datas ;
-	GameObject[] Obs;
-	public GameObject[] Island = new GameObject[6];
+	GameObject[] EnemiesGen, ObsGen, TreesGen;
+	[System.NonSerialized] public GameObject[] Island = new GameObject[6];
 
 
 	void Start () {
 		Island [2] = GameObject.Find ("Island");
 		GenObs = GetComponent<ToolsForGeneration> ();
 		Datas = GetComponent<ObsForGeneration> ().Datas;
-		Obs = GetComponent<AllObs> ().ObsList;
+		EnemiesGen = GetComponent<LoadFromPath> ().EnemiesAd;
+		ObsGen = GetComponent<LoadFromPath> ().ObsAd;
+		TreesGen = GetComponent<LoadFromPath> ().TreesAd;
 		GroundRenderer = GenObs.Ground.GetComponent<SpriteRenderer> ();
 	}
 
@@ -59,8 +63,10 @@ public class GenerationController : MonoBehaviour {
 		}
 		CheckerInstantiate (2); //чекер
 
-		for (var i = OnIsland.Length - 1; i >= 0; i--)  //зануление использованных данных после создания острова
-			OnIsland [i] = false;
+		for (var i = OnIslandEnemies.Length - 1; i >= 0; i--)  //зануление использованных данных после создания острова
+			OnIslandEnemies [i] = false;
+		for (var i = OnIslandObs.Length - 1; i >= 0; i--)  //зануление использованных данных после создания острова
+			OnIslandObs [i] = false;
 	}
 		
 
@@ -104,6 +110,8 @@ public class GenerationController : MonoBehaviour {
 		Coordinate += new Vector3 (RanX, 2 * RanY, 4);
 		CreateObject (0);
 		InstantiateObs (GenObs.Ground, Coordinate);
+
+		ToEnd--;
 		Coordinate -= new Vector3 (RanX, 2 * RanY, 4);
 
 		CreateObject (1);
@@ -155,54 +163,58 @@ public class GenerationController : MonoBehaviour {
 		if (Random.Range (0, 100) < ChanceOfObject) {
 			
 			int RanList = Random.Range (0, Datas [0].Parts [RanParts].ObsList.Length);
-			int RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Obs.Length);
-			Vector3 ObjectCoordinate;
+			int RanObject = Random.Range (0, 3);
 
+
+
+			Vector3 ObjectCoordinate;
+			int RanObs;
 			if (up == 1) {
 				
 				float RanZ = Random.Range ( 1f,  8f);
 				float RanX = Random.Range (0.4f,  GroundRenderer.sprite.bounds.size.x - 0.4f);
-
 				ObjectCoordinate = new Vector3 (Coordinate.x + RanX, Coordinate.y - (1.1f * GroundRenderer.sprite.bounds.size.y), RanZ);
 
-				if (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].OneOnIsland) 
-				{
-					int anotherSet;
-					if (Random.Range (0, 2) == 1) {
-						if (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Size == 1) {
-							anotherSet = Datas [0].Parts [RanParts].SizeOfCamp;
-							BigObjects (RanObs, anotherSet, RanList, ObjectCoordinate);
-						} else if (Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Size == 2) {
-							anotherSet = Datas [0].Parts [RanParts].SizeOfBigObjects;
-							BigObjects (RanObs, anotherSet, RanList, ObjectCoordinate);
-						}
+				switch (RanObject) {
+				case 0: 
+					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Enemies.Length);
+					if (!OnIslandEnemies [RanObs] && ThisSet > 4 && Random.Range ( 0,  5) == 3) {
+						InstantiateObs (EnemiesGen [Datas [0].Parts [RanParts].ObsList [RanList].Enemies [RanObs].Obs], ObjectCoordinate);
+						OnIslandEnemies [RanObs] = Datas [0].Parts [RanParts].ObsList [RanList].Enemies [RanObs].OneOnIsland;
 					}
-				} 
-				else
-					InstantiateObs (Obs[Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs], ObjectCoordinate);
+					break;
+				case 1: 
+					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Obs.Length);
+
+					int anotherSet;
+					anotherSet = Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Size;
+
+					if (!OnIslandObs [RanObs] && ThisSet > anotherSet && 
+						ToEnd > Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Size
+						&& Random.Range ( 0,  4) == 3) 
+					{
+						InstantiateObs (ObsGen[Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs], ObjectCoordinate);
+						OnIslandObs [RanObs] = Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].OneOnIsland;
+					}
+					break;
+				case 2: 
+					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Trees.Length);
+					InstantiateObs (TreesGen[Datas [0].Parts [RanParts].ObsList [RanList].Trees[RanObs].Obs], ObjectCoordinate);
+					break;
+				}
 				
 			} else { 
-				if (!Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].OneOnIsland) 
+				if (RanObject == 2) 
 				{
 					ObjectCoordinate = new Vector3 (Coordinate.x + (0.5f * GroundRenderer.sprite.bounds.size.x), 
 						Coordinate.y - (0.3f * GroundRenderer.sprite.bounds.size.y), Coordinate.z+0.01f);
-					
-					InstantiateObs (Obs[Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs], ObjectCoordinate);
+					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Trees.Length);
+					InstantiateObs (TreesGen[Datas [0].Parts [RanParts].ObsList [RanList].Trees [RanObs].Obs], ObjectCoordinate);
 				}
 			}
 		}
 	}
 		
-
-	void BigObjects(int RanObs, int anotherSet, int RanList, Vector3 ObjectCoordinate){
-		if (!OnIsland [RanObs] && ThisSet > anotherSet && 
-			ToEnd > Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Size+1) 
-		{
-			InstantiateObs (Obs[Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs], ObjectCoordinate);
-			OnIsland [RanObs] = true;
-		}
-	}
-
 
 	void InstantiateObs(GameObject path, Vector3 coord){    ///функция создания и присваивания родителя
 		

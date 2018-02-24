@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212126769435359300}
   - component: {fileID: 114772730519209330}
   m_Layer: 0
-  m_Name: SpritesTree_15
+  m_Name: LowTreeTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
