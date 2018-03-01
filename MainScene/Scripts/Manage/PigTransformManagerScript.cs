@@ -9,52 +9,55 @@ public class PigTransformManagerScript : MonoBehaviour {
 	public float force;
 
 	[System.NonSerialized] public Vector2 PigPos;
-	[System.NonSerialized] public bool left, right, forceTrue, grounded, Dead,  downSight, TwoTaps , StartG;
+	[System.NonSerialized] public bool left, right, forceTrue, grounded, Dead, TwoTaps;
+	public bool InGame;
 	[System.NonSerialized] public float speed, rotate;
 
 	void Start () {
 		if (MainPersonTransform)
 			PigPos = MainPersonTransform.position;
+		#if UNITY_EDITOR
 		else 
 			Debug.Log ("PigTransformManagerScript - MainPersonTransform not found");
+		#endif
 		
 		Dead = false;
 
 		Interface = GameObject.FindGameObjectWithTag ("InterfaceManager").GetComponent<InterfaceManagerScript> ();
+		#if UNITY_EDITOR
 		if(Interface == null)
 			Debug.Log ("PigTransformManagerScript - InterfaceManager not found");
+		#endif
 	}
 
 
 	void Update () {
-		if (StartG == false) {
-			if (MainPersonTransform)
-				PigPos = MainPersonTransform.position;
-			if (speed <= 1f) {
-				Interface.DownSightTrue = true;
-			} else {
-				Interface.DownSightTrue = false;
-			}
-		}
+		if (MainPersonTransform)
+			PigPos = MainPersonTransform.position;
+	
 	}
 
 	void FixedUpdate(){
-		StartG = Interface.StartGameTrue;
+		if (!Interface.GameOverTrue && !Interface.PauseMenu && !Interface.DownSightActivate && !Interface.StartGameTrue)
+			InGame = true;
+		else
+			InGame = false;
+
+		
 		if (Dead) {
 			Interface.GameOverTrue = Dead;
 			Interface.LifeTimeTrue  = !Dead ;
 		}
+
+
+		if ( speed < 1f )
+			Interface.DownSightCan = true;
+		else
+			Interface.DownSightCan = false;
 	}
 
 	void LateUpdate(){
-		if (StartG == false) {
-
-			if (speed <= 1f) {
-				Interface.DownSightCan = true;
-			} else {			
-				Interface.DownSightCan = false;
-			}
-		}
+		
 	}
 
 }

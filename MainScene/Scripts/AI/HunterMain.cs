@@ -64,7 +64,7 @@ public class HunterMain : MonoBehaviour {
 						}
 					} 
 					else if (target.name == "Trap")
-						Move (); //переделать
+						Move (); //Другая функция!
 					else 
 					{
 						Move (); // если цель не Piggy и не капкан, то двигаться дальше 

@@ -5,41 +5,42 @@ using UnityEngine.Sprites;
 
 public class LeafAnimator : MonoBehaviour {
 
-	/*Vector3 nowRotation, newRotation, differenceRotation;
-	float speedOfRotation, randomSpeed;
-	int signX, signY, signZ;
+	Vector3 nowRotation, newRotation;
+	Quaternion NowRot, NewRot;
+	[SerializeField] float speedOfRotation = 2f;
+	float randomSpeed, timer , colortimer = 0.5f;
+	SpriteRenderer ren;
 
 
 	void Start () {
-		nowRotation = transform.rotation.eulerAngles;
-		newRotation = new Vector3 (Random.Range (0f, 360f), Random.Range (0f, 360f), Random.Range (0f, 360f));
+		ren = GetComponent<SpriteRenderer> ();
 	}
 	
 
 	void Update () {
-		differenceRotation = new Vector3 (
-			Mathf.Abs ((nowRotation - newRotation).x), 
-			Mathf.Abs ((nowRotation - newRotation).y),
-			Mathf.Abs ((nowRotation - newRotation).z));
-		signX = Mathf.Sign ((nowRotation - newRotation).x);
-		signY = Mathf.Sign ((nowRotation - newRotation).y);
-		signZ = Mathf.Sign ((nowRotation - newRotation).z);
-		if (differenceRotation > 0.5f) {
+		randomSpeed = Time.deltaTime * Random.Range (0.15f, 2f) * 0.5f;
 
+		if (timer > 0) {
+			
+			transform.rotation = Quaternion.Slerp (NowRot, NewRot, speedOfRotation * randomSpeed);
+			NowRot = transform.rotation;
+			nowRotation = NowRot.eulerAngles;
+			timer -= Time.deltaTime;
+
+		} else {
+			timer = .15f * speedOfRotation;
+			newRotation = new Vector3 (Random.Range (-360f, 360f)/360f, Random.Range (-360f, 360f)/360f, Random.Range (-360f, 360f)/360f);
+			NewRot = Quaternion.AngleAxis (180f, newRotation );
 		}
 
+		transform.position = new Vector2 (transform.position.x, transform.position.y - randomSpeed);
+		if (colortimer > 0)
+			colortimer -= Time.deltaTime;
+		else {
+			ren.color = new Color (ren.color.r, ren.color.g, ren.color.b, ren.color.a - randomSpeed);
+			Destroy (gameObject, 1f);
+		}
 
-
-
-		differenceRotation = new Vector3 (
-			Mathf.Abs ((nowRotation - newRotation).x)* Time.deltaTime, 
-			Mathf.Abs ((nowRotation - newRotation).y)* Time.deltaTime,
-			Mathf.Abs ((nowRotation - newRotation).z)* Time.deltaTime);
-		transform.localRotation = Quaternion.Euler (differenceRotation.x, differenceRotation.y, differenceRotation.z);
 	}
-	void LateUpdate(){
-		
-		nowRotation = transform.rotation.eulerAngles;
-		newRotation = new Vector3 (Random.Range (0f, 360f), Random.Range (0f, 360f), Random.Range (0f, 360f));
-	}*/
+
 }

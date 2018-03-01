@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DownSightTap : MonoBehaviour {
-	PigTransformManagerScript Trans;
-	// Use this for initialization
+	InterfaceManagerScript Interface;
 	void Start () {
-		Trans = GameObject.FindGameObjectWithTag ("PigTransformManager").GetComponent<PigTransformManagerScript> ();
+		Interface = GameObject.FindGameObjectWithTag ("InterfaceManager").GetComponent<InterfaceManagerScript> ();
+		#if UNITY_EDITOR
+		if(Interface == null)
+			Debug.Log ("DownSightTap - InterfaceManager not found");
+		#endif
 	}
-	
-	void OnMouseDrag(){
-		Trans.downSight = true;
-		Trans.speed = 0;
-		Trans.TwoTaps = false;
+
+	void OnMouseDown(){
+		Interface.DownSightActivate = true;
 	}
 
 	void OnMouseUp(){
-		Trans.downSight = false;
+		Interface.DownSightActivate = false;
 	}
 }

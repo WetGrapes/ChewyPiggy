@@ -8,15 +8,18 @@ public class TrapData : MonoBehaviour {
 	bool _ACTIVE = true;
 	void Start () {
 		ManagerTransform = GameObject.FindGameObjectWithTag ("PigTransformManager");
+		GetComponent<SpriteList> ().number = 1;
 	}
 	void FixedUpdate () {
 		PigPos = ManagerTransform.GetComponent<PigTransformManagerScript> ().PigPos;
-		if (Mathf.Abs (PigPos.x - transform.position.x) < 1.0f &&
-		    Mathf.Abs (PigPos.y - transform.position.y) < 1.0f &&
-		    _ACTIVE == true) {
+		if (Mathf.Abs (PigPos.x - transform.position.x) < 0.5f &&
+		    Mathf.Abs (PigPos.y - transform.position.y) < 0.5f &&
+		    _ACTIVE == true) 
+		{
 			ManagerTransform.GetComponent<PigTransformManagerScript> ().Dead = _ACTIVE;
 			_ACTIVE = false;
-			GetComponent<SpriteList> ().number = 1;
+			GetComponent<SpriteList> ().number = 0;
 		}
+
 	}
 }

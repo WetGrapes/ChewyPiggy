@@ -19,10 +19,26 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4241513469422638}
-  - component: {fileID: 212975368378396164}
-  - component: {fileID: 114649555051685348}
+  - component: {fileID: 212990794110562988}
+  - component: {fileID: 114916625812387836}
   m_Layer: 0
   m_Name: Berezka
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1730923487137018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4472809005659704}
+  - component: {fileID: 114577426861627750}
+  m_Layer: 0
+  m_Name: LeafFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,14 +50,40 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1097760151550650}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.813953, y: -4.572916, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4472809005659704}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114649555051685348
+--- !u!4 &4472809005659704
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730923487137018}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4241513469422638}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114577426861627750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730923487137018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614352fb0671b6e4cb3e6b6a00a97f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Leaf: {fileID: 1257531514580344, guid: 5e7dc0b09a16a9e43a50d71fa96f2008, type: 2}
+--- !u!114 &114916625812387836
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a59802573ea6549a7412cd5b57e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &212975368378396164
+--- !u!212 &212990794110562988
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

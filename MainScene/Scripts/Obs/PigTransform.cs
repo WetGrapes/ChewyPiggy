@@ -19,19 +19,20 @@ public class PigTransform : MonoBehaviour {
 	}
 	void Update () {
 		if (Trans != null) {
-			SpeedDinamic ();
+			if(!Trans.Dead)
+				SpeedDinamic ();
 			AllJump ();
 		} 
 	}
 
 
 	void FixedUpdate(){
-		AnimatorSwitch ();
+			AnimatorSwitch ();
 	}
 
 
 	void LateUpdate(){
-		SpeedAfterPiggyRotate ();
+			SpeedAfterPiggyRotate ();
 	}
 
 
