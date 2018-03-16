@@ -9,18 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1227477833481150}
+  m_RootGameObject: {fileID: 1062712974270416}
   m_IsPrefabParent: 1
---- !u!1 &1227477833481150
+--- !u!1 &1062712974270416
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4151992869171064}
-  - component: {fileID: 212082681944374392}
-  - component: {fileID: 114774930529518334}
+  - component: {fileID: 4970409739954042}
+  - component: {fileID: 212746003513152092}
+  - component: {fileID: 114229529726724180}
+  - component: {fileID: 114861007253301586}
   m_Layer: 0
   m_Name: treeOne
   m_TagString: Untagged
@@ -28,15 +29,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1231469670179748
+--- !u!1 &1878709494598582
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4525187760568942}
-  - component: {fileID: 114140626424382700}
+  - component: {fileID: 4226090245936368}
+  - component: {fileID: 114471773058669502}
   m_Layer: 0
   m_Name: LeafFactory
   m_TagString: Untagged
@@ -44,62 +45,73 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4151992869171064
+--- !u!4 &4226090245936368
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1227477833481150}
+  m_GameObject: {fileID: 1878709494598582}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4970409739954042}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4970409739954042
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1062712974270416}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4525187760568942}
+  - {fileID: 4226090245936368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4525187760568942
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231469670179748}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4151992869171064}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114140626424382700
+--- !u!114 &114229529726724180
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231469670179748}
+  m_GameObject: {fileID: 1062712974270416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a59802573ea6549a7412cd5b57e915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114471773058669502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878709494598582}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614352fb0671b6e4cb3e6b6a00a97f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Leaf: {fileID: 1257531514580344, guid: 5e7dc0b09a16a9e43a50d71fa96f2008, type: 2}
---- !u!114 &114774930529518334
+--- !u!114 &114861007253301586
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1227477833481150}
+  m_GameObject: {fileID: 1062712974270416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a59802573ea6549a7412cd5b57e915, type: 3}
+  m_Script: {fileID: 11500000, guid: baa8bd3e12b6bec4db3781fab9e7bcb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &212082681944374392
+--- !u!212 &212746003513152092
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1227477833481150}
+  m_GameObject: {fileID: 1062712974270416}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
