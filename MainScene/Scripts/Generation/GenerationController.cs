@@ -5,7 +5,7 @@ using UnityEngine.Sprites;
 
 public class GenerationController : MonoBehaviour {
 	
-	[System.NonSerialized] public bool Right = true ; 
+	 public bool Right = true ; 
 	public bool Precipices;
 	[Range (0, 100)] public int ChanceOfObject = 45;
 	[System.NonSerialized] public int XLvl=1;
@@ -19,7 +19,7 @@ public class GenerationController : MonoBehaviour {
 	SpriteRenderer GroundRenderer;
 	ListOfLevels[] Datas ;
 	GameObject[] EnemiesGen, ObsGen, TreesGen;
-	[System.NonSerialized] public GameObject[] Island = new GameObject[6];
+	 public GameObject[] Island = new GameObject[6];
 
 
 	void Start () {
@@ -43,8 +43,8 @@ public class GenerationController : MonoBehaviour {
 			} 
 			else 
 			{
-				CreateInTime (Island [2].GetComponent<IslandManage> ().LeftChecker.position, 0, 1);	//левый остров
-				CreateInTime (Island [2].GetComponent<IslandManage> ().RightChecker.position, 1, -1); 	//правый остров
+				CreateInTime (Island [2].GetComponent<IslandManage> ().LeftChecker.position, 1, 1);	//левый остров
+				CreateInTime (Island [2].GetComponent<IslandManage> ().RightChecker.position, 0, -1); 	//правый остров
 			}
 			Island [2].GetComponent<IslandManage> ().ThisIslandActivate = false;
 		}
@@ -56,6 +56,8 @@ public class GenerationController : MonoBehaviour {
 		Island [IslandNum] = Instantiate (GenObs.Island, Coordinate, Quaternion.identity) as GameObject; // родитель остров
 
 		CheckerInstantiate (1); //чекер
+		for (int i = 0; i < GenObs.IslandObs.Length; i++)
+			IslandInfro (GenObs.IslandObs [i], Coordinate);
 		// генерация нескольких сетов с перепадами высот
 		for (int AmountSet = Random.Range (3, Datas [0].Parts [RanParts].AmountSet); AmountSet >= 0; AmountSet--) {
 			InstantiateUpDown (); // перепад высот
@@ -109,7 +111,7 @@ public class GenerationController : MonoBehaviour {
 
 		Coordinate += new Vector3 (RanX, 2 * RanY, 4);
 		CreateObject (0);
-		InstantiateObs (GenObs.Ground, Coordinate);
+		InstantiateObs ( GenObs.Ground, 3, Coordinate);
 
 		ToEnd--;
 		Coordinate -= new Vector3 (RanX, 2 * RanY, 4);
@@ -151,7 +153,7 @@ public class GenerationController : MonoBehaviour {
 		for (int DownSet = 1 + Random.Range (Datas [0].Parts [RanParts].DownSet-3, Datas [0].Parts [RanParts].DownSet); DownSet != 0; DownSet--) 
 		{
 			Coordinate -= new Vector3 (0, GroundRenderer.sprite.bounds.size.y, 0);
-			InstantiateObs (GenObs.Ground, Coordinate);
+			InstantiateObs ( GenObs.Ground, 3, Coordinate);
 		}
 
 		Coordinate = new Vector3 (Coordinate.x, YBeforeDownSet, 0);
@@ -179,7 +181,7 @@ public class GenerationController : MonoBehaviour {
 				case 0: 
 					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Enemies.Length);
 					if (!OnIslandEnemies [RanObs] && ThisSet > 4 && Random.Range ( 0,  5) == 3) {
-						InstantiateObs (EnemiesGen [Datas [0].Parts [RanParts].ObsList [RanList].Enemies [RanObs].Obs], ObjectCoordinate);
+						InstantiateObs (EnemiesGen [Datas [0].Parts [RanParts].ObsList [RanList].Enemies [RanObs].Obs], 2, ObjectCoordinate);
 						OnIslandEnemies [RanObs] = Datas [0].Parts [RanParts].ObsList [RanList].Enemies [RanObs].OneOnIsland;
 					}
 					break;
@@ -193,13 +195,13 @@ public class GenerationController : MonoBehaviour {
 						ToEnd > Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Size
 						&& Random.Range ( 0,  4) == 3) 
 					{
-						InstantiateObs (ObsGen[Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs], ObjectCoordinate);
+						InstantiateObs (ObsGen[Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].Obs], 4, ObjectCoordinate);
 						OnIslandObs [RanObs] = Datas [0].Parts [RanParts].ObsList [RanList].Obs [RanObs].OneOnIsland;
 					}
 					break;
 				case 2: 
 					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Trees.Length);
-					InstantiateObs (TreesGen[Datas [0].Parts [RanParts].ObsList [RanList].Trees[RanObs].Obs], ObjectCoordinate);
+					InstantiateObs (TreesGen[Datas [0].Parts [RanParts].ObsList [RanList].Trees[RanObs].Obs], 5, ObjectCoordinate);
 					break;
 				}
 				
@@ -209,18 +211,18 @@ public class GenerationController : MonoBehaviour {
 					ObjectCoordinate = new Vector3 (Coordinate.x + (0.5f * GroundRenderer.sprite.bounds.size.x), 
 						Coordinate.y - (0.3f * GroundRenderer.sprite.bounds.size.y), Coordinate.z+0.01f);
 					RanObs = Random.Range (0, Datas [0].Parts [RanParts].ObsList [RanList].Trees.Length);
-					InstantiateObs (TreesGen[Datas [0].Parts [RanParts].ObsList [RanList].Trees [RanObs].Obs], ObjectCoordinate);
+					InstantiateObs (TreesGen[Datas [0].Parts [RanParts].ObsList [RanList].Trees [RanObs].Obs], 5, ObjectCoordinate);
 				}
 			}
 		}
 	}
 		
 
-	void InstantiateObs(GameObject path, Vector3 coord){    ///функция создания и присваивания родителя
+	void InstantiateObs(GameObject path, int numOfChild, Vector3 coord){    ///функция создания и присваивания родителя
 		
 		GameObject Obs = Instantiate (path, coord, Quaternion.identity) as GameObject;
 
-		Obs.transform.SetParent (Island [IslandNum].transform);
+		Obs.transform.SetParent (Island [IslandNum].transform.GetChild(numOfChild).transform);
 
 		if(Obs.GetComponent<EdgeChecker>())
 			Obs.GetComponent<EdgeChecker> ().XLvl = XLvl;
@@ -268,6 +270,22 @@ public class GenerationController : MonoBehaviour {
 		XLvl = Rotate;
 		IslandNum = INum;
 		IslandInstantiate ();
+	}
+
+
+
+
+
+
+
+	void IslandInfro(GameObject path, Vector3 coord)
+	{
+		GameObject Obs = Instantiate (path, coord, Quaternion.identity) as GameObject;
+
+		Obs.transform.SetParent (Island [IslandNum].transform);
+
+		if(Obs.GetComponent<EdgeChecker>())
+			Obs.GetComponent<EdgeChecker> ().XLvl = XLvl;
 	}
 
 }
