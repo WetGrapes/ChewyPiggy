@@ -103,10 +103,10 @@ public class InterfaceManagerScript : MonoBehaviour {
 	void Act(ref GameObject  Name, string nameOfObject, bool NameTrue) {
 		if (Name != null)
 			Name.gameObject.SetActive (NameTrue);
-		#if UNITY_EDITOR
+		/*#if UNITY_EDITOR
 		else
 			Debug.Log (nameOfObject + " not found");
-		#endif
+		#endif*/
 	}
 
 

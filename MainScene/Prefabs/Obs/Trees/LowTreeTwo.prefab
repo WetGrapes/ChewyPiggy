@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4135512864233774}
-  - component: {fileID: 114798419926524768}
+  - component: {fileID: 114589682456682608}
   m_Layer: 0
   m_Name: LeafFactory
   m_TagString: Untagged
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4965024797269690}
   - component: {fileID: 212014840036387212}
   - component: {fileID: 114193774912151894}
-  - component: {fileID: 114896805577366696}
+  - component: {fileID: 114574234359208754}
   m_Layer: 0
   m_Name: LowTreeTwo
   m_TagString: Untagged
@@ -83,19 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a59802573ea6549a7412cd5b57e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114798419926524768
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1114300411067374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614352fb0671b6e4cb3e6b6a00a97f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Leaf: {fileID: 1257531514580344, guid: 5e7dc0b09a16a9e43a50d71fa96f2008, type: 2}
---- !u!114 &114896805577366696
+--- !u!114 &114574234359208754
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -103,9 +91,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1873434554627600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa8bd3e12b6bec4db3781fab9e7bcb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 42336f944dfad6347a531507e427f290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114589682456682608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114300411067374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5295ee4ad5704a4280c47483925021e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Leaf: {fileID: 1257531514580344, guid: c043f1e62f19ad640a7646cd8f9c8d7b, type: 2}
 --- !u!212 &212014840036387212
 SpriteRenderer:
   m_ObjectHideFlags: 1

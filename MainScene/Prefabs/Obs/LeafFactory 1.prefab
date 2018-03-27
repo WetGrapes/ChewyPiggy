@@ -9,46 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1596047099299958}
+  m_RootGameObject: {fileID: 1742359375239156}
   m_IsPrefabParent: 1
---- !u!1 &1596047099299958
+--- !u!1 &1742359375239156
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4639744844701538}
-  - component: {fileID: 114658891164264650}
+  - component: {fileID: 4329215636709492}
+  - component: {fileID: 114415507669714606}
   m_Layer: 0
-  m_Name: LeafFactory
+  m_Name: LeafFactory 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4639744844701538
+--- !u!4 &4329215636709492
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596047099299958}
+  m_GameObject: {fileID: 1742359375239156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114658891164264650
+--- !u!114 &114415507669714606
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596047099299958}
+  m_GameObject: {fileID: 1742359375239156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614352fb0671b6e4cb3e6b6a00a97f3c, type: 3}
+  m_Script: {fileID: 11500000, guid: c5295ee4ad5704a4280c47483925021e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Leaf: {fileID: 1257531514580344, guid: 5e7dc0b09a16a9e43a50d71fa96f2008, type: 2}
+  Leaf: {fileID: 1257531514580344, guid: c043f1e62f19ad640a7646cd8f9c8d7b, type: 2}

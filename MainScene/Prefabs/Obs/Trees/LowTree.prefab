@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4012766679357574}
   - component: {fileID: 212331297023948256}
   - component: {fileID: 114295298672879686}
-  - component: {fileID: 114890599756323672}
+  - component: {fileID: 114884443932473852}
   m_Layer: 0
   m_Name: LowTree
   m_TagString: Untagged
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4431321238195840}
-  - component: {fileID: 114963351690689370}
+  - component: {fileID: 114995783500841760}
   m_Layer: 0
   m_Name: LeafFactory
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a59802573ea6549a7412cd5b57e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114890599756323672
+--- !u!114 &114884443932473852
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,10 +91,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619219278422284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa8bd3e12b6bec4db3781fab9e7bcb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 42336f944dfad6347a531507e427f290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114963351690689370
+--- !u!114 &114995783500841760
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,10 +102,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1634989174596952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614352fb0671b6e4cb3e6b6a00a97f3c, type: 3}
+  m_Script: {fileID: 11500000, guid: c5295ee4ad5704a4280c47483925021e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Leaf: {fileID: 1257531514580344, guid: 5e7dc0b09a16a9e43a50d71fa96f2008, type: 2}
+  Leaf: {fileID: 1257531514580344, guid: c043f1e62f19ad640a7646cd8f9c8d7b, type: 2}
 --- !u!212 &212331297023948256
 SpriteRenderer:
   m_ObjectHideFlags: 1
