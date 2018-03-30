@@ -38,7 +38,7 @@ public class PigTransformManagerScript : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (!Interface.GameOverTrue && !Interface.PauseMenu && !Interface.DownSightActivate && !Interface.StartGameTrue)
+		if (!Interface.GameOverTrue && !Interface.PauseMenu && !Interface.StartGameTrue)
 			InGame = true;
 		else
 			InGame = false;
@@ -50,14 +50,7 @@ public class PigTransformManagerScript : MonoBehaviour {
 		}
 
 
-		if ( speed < 1f )
-			Interface.DownSightCan = true;
-		else
-			Interface.DownSightCan = false;
-	}
 
-	void LateUpdate(){
-		
 	}
 
 }

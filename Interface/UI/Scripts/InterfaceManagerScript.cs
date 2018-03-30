@@ -64,13 +64,6 @@ public class InterfaceManagerScript : MonoBehaviour {
 	[Space]
 	public GameObject GameOver;
 	[System.NonSerialized] public bool GameOverTrue;
-	[Space]
-	public GameObject DownSight;
-	[System.NonSerialized] public bool DownSightTrue;
-	[System.NonSerialized] public bool DownSightActivate;
-	[System.NonSerialized] public bool DownSightCan;
-	[System.NonSerialized] public float DownSightTimer;
-
 
 
 	void Start () {
@@ -92,49 +85,19 @@ public class InterfaceManagerScript : MonoBehaviour {
 
 		StartGameTrue = true;
 		GameOverTrue = false;
-		DownSightTrue = false;
 
-
-		Act (ref DownSight, "DownSight",  DownSightTrue);
 	}
-
 
 
 	void Act(ref GameObject  Name, string nameOfObject, bool NameTrue) {
 		if (Name != null)
 			Name.gameObject.SetActive (NameTrue);
-		/*#if UNITY_EDITOR
-		else
-			Debug.Log (nameOfObject + " not found");
-		#endif*/
 	}
 
-
-
-	void Update(){
-		DownSightAct ();
-	}
 	void FixedUpdate () {
 		if (GameOverTrue == true)
 			Die ();
 		AllAct ();
-	}
-
-
-
-
-
-
-	void DownSightAct(){
-		if (!StartGameTrue && DownSightCan) {
-			if (DownSightTimer >= 0)
-				DownSightTimer -= Time.fixedDeltaTime;
-			else
-				DownSightTrue = true;
-		} else {
-			DownSightTimer = 1f;
-			DownSightTrue = false;
-		}
 	}
 
 	void Die()
@@ -154,8 +117,6 @@ public class InterfaceManagerScript : MonoBehaviour {
 		RelaxTrue = false;
 
 		StartGameTrue = false;
-		DownSightTrue = false;
-		DownSightTimer = 1f;
 	}
 
 
@@ -176,7 +137,6 @@ public class InterfaceManagerScript : MonoBehaviour {
 		Act (ref RUN, "RUN",  RUNTrue);
 		Act (ref Relax, "Relax",  RelaxTrue);
 
-		Act (ref DownSight, "DownSight", DownSightTrue);
 		Act (ref StartGame, "StartGame", StartGameTrue);
 		Act (ref GameOver, "GameOver",  GameOverTrue);
 

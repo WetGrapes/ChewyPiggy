@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class CameraRetraction : MonoBehaviour {
 
-	[SerializeField] [Range(3,8)] float standartRange;
-	[SerializeField] [Range(3,8)] float reverseRange;
-	[SerializeField] bool Reverse;
-	float speedy=.0f;
+	[SerializeField] [Range(3,8)] float standartRange = 4.5f;
+	[SerializeField] [Range(3,8)] float reverseRange = 6.5f;
+	[SerializeField] bool Reverse = true;
+	float speedy = .0f;
 	PigTransformManagerScript Trans;
-	Camera camera;
+	Camera cam;
 	void Start () {
 		Trans = GameObject.FindGameObjectWithTag ("PigTransformManager").GetComponent<PigTransformManagerScript> ();
-		camera = gameObject.GetComponent<Camera> ();
+		cam = gameObject.GetComponent<Camera> ();
 	}
 	
 
 	void FixedUpdate () {
 		if (speedy <= Trans.speed / 4) {
 			if (speedy <= 2.1f)
-				speedy += Time.deltaTime * (speedy + 1f);
+				speedy += (Time.deltaTime / 1.25f);
 		} else {
 			if (speedy >= 0.2f)
-				speedy -= Time.deltaTime;
+				speedy -= Time.deltaTime / 0.75f;
 		}
 		if (Reverse)
-			camera.orthographicSize = reverseRange - speedy;
+			cam.orthographicSize = reverseRange - speedy;
 		else
-			camera.orthographicSize = standartRange + speedy;
+			cam.orthographicSize = standartRange + speedy;
 	}
 }
