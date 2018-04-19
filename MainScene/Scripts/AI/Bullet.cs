@@ -20,12 +20,18 @@ public class Bullet : MonoBehaviour {
 			transform.Translate (Vector3.right * Parent.bulletSpeed * Time.deltaTime);
 			if (Mathf.Abs (Trans.PigPos.x - transform.position.x) < 0.3f && Mathf.Abs (Trans.PigPos.y - transform.position.y) < 0.3f) {
 				Trans.Dead = true;
+				TotalCounterManage.MyScoreCount -= 20;
+				TotalCounterManage.MyDeadCount++;
+				StPos ();
 			}
 		} else {
-			transform.localPosition = start;//new Vector2 (0.81f, 0.15f);
-			gameObject.SetActive (false);
+			StPos ();
 		}
 	}
 
+	void StPos(){
+		transform.localPosition = start;//new Vector2 (0.81f, 0.15f);
+		gameObject.SetActive (false);
+	}
 
 }

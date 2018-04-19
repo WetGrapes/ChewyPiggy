@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HideOutsideCamera : MonoBehaviour {
 
-	CameraManage CamManager;
+	/*CameraManage CamManager;
 	Camera Cam;
 	void Start () {
 		CamManager = GameObject.FindGameObjectWithTag ("Camera").GetComponent<CameraManage> ();
@@ -12,7 +12,7 @@ public class HideOutsideCamera : MonoBehaviour {
 	}
 	
 
-	/*void FixedUpdate () {
+	void FixedUpdate () {
 		if (Mathf.Abs (transform.position.x - CamManager.ThisCamTransform.position.x) >
 			Cam.orthographicSize * 2 + 5 || 
 			Mathf.Abs (transform.position.y - CamManager.ThisCamTransform.position.y) >

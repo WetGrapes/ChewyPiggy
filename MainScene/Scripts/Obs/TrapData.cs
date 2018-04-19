@@ -18,6 +18,8 @@ public class TrapData : MonoBehaviour {
 		{
 			ManagerTransform.GetComponent<PigTransformManagerScript> ().Dead = _ACTIVE;
 			_ACTIVE = false;
+			TotalCounterManage.MyScoreCount -= 10;
+			TotalCounterManage.MyDeadCount++;
 			GetComponent<SpriteList> ().number = 0;
 		}
 

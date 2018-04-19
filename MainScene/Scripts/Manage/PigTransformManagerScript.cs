@@ -44,10 +44,10 @@ public class PigTransformManagerScript : MonoBehaviour {
 			InGame = false;
 
 		
-		if (Dead) {
-			Interface.GameOverTrue = Dead;
-			Interface.LifeTimeTrue  = !Dead ;
-		}
+
+		Interface.GameOverTrue = Dead;
+		Interface.LifeTimeTrue = !Dead ;
+
 
 
 

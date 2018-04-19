@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class TimeManage : MonoBehaviour {
 	InterfaceManagerScript Interface;
+	PigTransformManagerScript Trans;
+
 	float Timer = 0;
 	[System.NonSerialized] public int  Minute=1, Second=0, allTime=60;
 	[System.NonSerialized] public bool clock = true, accountant = false;
 
 	void Start () {
+		Trans = GameObject.FindGameObjectWithTag ("PigTransformManager").GetComponent<PigTransformManagerScript> ();
 		Interface = GameObject.FindGameObjectWithTag ("InterfaceManager").GetComponent<InterfaceManagerScript> ();
-		#if UNITY_EDITOR
-		if(Interface == null)
-			Debug.Log ("TimeManage - InterfaceManager not found");
-		#endif
+
 	}
 	
 
 	void FixedUpdate () {
-		if (Interface.LifeTimeTrue == true) {
+		if (Interface.LifeTimeTrue && !Interface.PauseMenu && !Interface.StartGameTrue) {
 			if (Timer <= 1)
 				Timer += Time.fixedDeltaTime;
 			else {
-				Interface.LifeTimeNow -= 1;
-				if (Interface.LifeTimeNow <= 0)
-					Interface.GameOverTrue = true;
+				
+				Interface.LifeTimeNow --;
+				TotalCounterManage.MyPlayingTimeSecondsCount++;
+				TotalCounterManage.score = true;
+				TotalCounterManage.Upgrade++;
+				if (Interface.LifeTimeNow <= 0) {
+					Trans.Dead = true;
+					TotalCounterManage.MyScoreCount -= 60;
+					TotalCounterManage.MyDeadCount++;
+				}
 				Timer = 0;
 			}
 			allTime = (int)Interface.LifeTimeNow;

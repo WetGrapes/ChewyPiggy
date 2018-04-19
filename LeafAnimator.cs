@@ -5,7 +5,7 @@ using UnityEngine.Sprites;
 
 public class LeafAnimator : MonoBehaviour {
 
-	Vector3 nowRotation, newRotation;
+	Vector3 newRotation;
 	Quaternion NowRot, NewRot;
 	[SerializeField] float speedOfRotation = 2f;
 	float randomSpeed, timer , colortimer = 0.5f;
@@ -24,7 +24,6 @@ public class LeafAnimator : MonoBehaviour {
 			
 			transform.rotation = Quaternion.Slerp (NowRot, NewRot, speedOfRotation * randomSpeed);
 			NowRot = transform.rotation;
-			nowRotation = NowRot.eulerAngles;
 			timer -= Time.deltaTime;
 
 		} else {

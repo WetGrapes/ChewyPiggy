@@ -10,4 +10,5 @@ public class ToolsForGeneration : MonoBehaviour {
 	public GameObject LeftChecker;
 	public GameObject RightChecker;
 	public GameObject Burger;
+	public GameObject Grass;
 }

@@ -64,9 +64,76 @@ public class InterfaceManagerScript : MonoBehaviour {
 	[Space]
 	public GameObject GameOver;
 	[System.NonSerialized] public bool GameOverTrue;
+	[Space]
+	public GameObject Restart;
+	[System.NonSerialized] public bool RestartTrue;
+	[System.NonSerialized] public bool RestartActivated;
 
 
 	void Start () {
+		AllFalse ();
+
+		StartGameTrue = true;
+	}
+
+
+
+
+	void FixedUpdate () {
+		if (GameOverTrue)
+			GameOverFunc ();
+		if (RestartActivated)
+			RestartFunc ();
+		if (StartGameTrue)
+			StartGameFunc ();
+		
+		AbilityMenuAct (AbilitiesMenu);
+		PauseMenuAct (PauseMenu);
+
+		AllAct ();
+	}
+
+	void Act(ref GameObject  Name, string nameOfObject, bool NameTrue) {
+		if (Name != null)
+			Name.gameObject.SetActive (NameTrue);
+	}
+
+	void StartGameFunc(){
+		AllFalse ();
+		StartGameTrue = true;
+		LifeTimeNow = 60;
+	}
+
+
+
+	public void GameOverFunc()
+	{
+		AllFalse ();
+		GameOverTrue = true;
+		RestartTrue = true;
+	}
+
+	void RestartFunc(){
+		AllFalse ();
+
+	}
+
+	void AbilityMenuAct(bool Active)
+	{
+		DoubleJumpTrue = Active;
+		SuperPigTrue = Active;
+		SnackTrue = Active;
+		CompassTrue = Active;
+	}
+	void PauseMenuAct(bool Active)
+	{
+		BackgroundTrue = Active;
+		RUNTrue = Active;
+		RelaxTrue = Active;
+	}
+
+	void AllFalse()
+	{
 		CanvasObTrue = true;
 
 		LifeTimeTrue = false;
@@ -80,45 +147,14 @@ public class InterfaceManagerScript : MonoBehaviour {
 		CompassTrue = false;
 
 		PauseTrue = false;
-		RUNTrue = false;
-		RelaxTrue = false;
-
-		StartGameTrue = true;
-		GameOverTrue = false;
-
-	}
-
-
-	void Act(ref GameObject  Name, string nameOfObject, bool NameTrue) {
-		if (Name != null)
-			Name.gameObject.SetActive (NameTrue);
-	}
-
-	void FixedUpdate () {
-		if (GameOverTrue == true)
-			Die ();
-		AllAct ();
-	}
-
-	void Die()
-	{
-		LifeTimeTrue = false;
-		ClockTrue = false;
-		AccountantTrue = false;
-
-		AbilitiesTrue = false;
-		DoubleJumpTrue = false;
-		SuperPigTrue = false;
-		SnackTrue = false;
-		CompassTrue = false;
-
-		PauseTrue = false;
+		BackgroundTrue = false;
 		RUNTrue = false;
 		RelaxTrue = false;
 
 		StartGameTrue = false;
+		GameOverTrue = false;
+		RestartTrue = false;
 	}
-
 
 
 	void AllAct(){
@@ -134,11 +170,12 @@ public class InterfaceManagerScript : MonoBehaviour {
 		Act (ref Compass, "Compass",  CompassTrue);
 
 		Act (ref Pause, "Pause",  PauseTrue);
+		Act (ref Background, "Background",  BackgroundTrue);
 		Act (ref RUN, "RUN",  RUNTrue);
 		Act (ref Relax, "Relax",  RelaxTrue);
 
 		Act (ref StartGame, "StartGame", StartGameTrue);
 		Act (ref GameOver, "GameOver",  GameOverTrue);
-
+		Act (ref Restart, "Restart", RestartTrue);
 	}
 }

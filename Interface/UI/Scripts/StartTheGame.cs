@@ -10,7 +10,7 @@ public class StartTheGame : MonoBehaviour {
 		Interface = GameObject.FindGameObjectWithTag ("InterfaceManager").GetComponent<InterfaceManagerScript> ();
 		#if UNITY_EDITOR
 		if(Interface == null)
-			Debug.Log ("PigTransformManagerScript - InterfaceManager not found");
+			Debug.Log ("StartTheGame - InterfaceManager not found");
 		#endif
 	}
 

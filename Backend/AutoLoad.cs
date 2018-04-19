@@ -26,7 +26,7 @@ public class AutoLoad {
 		for (int j = 0; j < filepath.Length; j++) {
 			
 			List<string> nameList = new List<string>();
-			var di = new DirectoryInfo (Application.dataPath + "/MainScene/Prefabs/Obs/" + filepath [j]);
+			var di = new DirectoryInfo (Application.dataPath + "/ChewyPiggy/MainScene/Prefabs/Obs/" + filepath [j]);
 			FileInfo[] files = di.GetFiles ("*.prefab");
 
 			for (int i = 0; i < files.Length; i++) {
@@ -36,7 +36,7 @@ public class AutoLoad {
 			enums [j].names = nameList;
 		}
 
-		using (StreamWriter streamWriter = new StreamWriter (Application.dataPath+"/Backend/enum.cs")) {
+		using (StreamWriter streamWriter = new StreamWriter (Application.dataPath+"/ChewyPiggy/Backend/enum.cs")) {
 			foreach (var e in enums) {
 				AddName (streamWriter, e.names, e.name);
 			}

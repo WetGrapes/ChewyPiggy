@@ -7,7 +7,7 @@ public class EdgeChecker : MonoBehaviour {
 	GenerationController Generator;
 	Vector2 PigPos;
 	public int XLvl;
-	[SerializeField] private bool Right = false;
+	public bool Right = false;
 	float timer;
 	bool act;
 
@@ -27,18 +27,16 @@ public class EdgeChecker : MonoBehaviour {
 				timer = 2f;
 				act = true;
 				Generator.Right = Right;
+				TotalCounterManage.MyVisitedIslandCount++;
 				NewMainIsland ();
 			}
 		if (timer<0){
-			//UnActIslands ();
-			Destroy (transform.gameObject);
+			Destroy (transform.gameObject, 1);
 		}
 	}
 
 	void NewMainIsland(){
-		Generator.Island [5] = Generator.Island [2];
-		Generator.Island [4] = Generator.Island [1];
-		Generator.Island [3] = Generator.Island [0];
+		Generator.Island [3] = Generator.Island [2];
 
 		if (XLvl == 1) {
 			if (Right == true)
@@ -53,28 +51,5 @@ public class EdgeChecker : MonoBehaviour {
 				Generator.Island [2] = Generator.Island [1];	
 		}
 	}
-
-	void UnActIslands()
-	{
-		GameObject[] delete = new GameObject[3];
-
-		if (Generator.Island [2] != Generator.Island [3]) {
-			delete [0] = Generator.Island [3];
-			Generator.Island [3] = GameObject.FindGameObjectWithTag ("GenerationManager");
-			delete [0].SetActive (false);
-		} else
-			Generator.Island [3] = GameObject.FindGameObjectWithTag ("GenerationManager");
-		if (Generator.Island [2] != Generator.Island [4]) {
-			delete [1] = Generator.Island [4];
-			Generator.Island [4] = GameObject.FindGameObjectWithTag ("GenerationManager");
-			delete [1].SetActive (false);
-		} else
-			Generator.Island [4] = GameObject.FindGameObjectWithTag ("GenerationManager");
-
-		delete [2] = Generator.Island [5];
-		Generator.Island [5] = GameObject.FindGameObjectWithTag ("GenerationManager");
-		delete [2].SetActive (false);
-	}
-
 
 }

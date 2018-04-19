@@ -7,7 +7,7 @@ public class IslandManage : MonoBehaviour {
 	public Transform LeftChecker, RightChecker;
 	public bool ThisIslandActivate, ReadyForSleep;
 	public float TimeToDie;
-	float timer = 10f;
+	float timer = 1f;
 	int sum;
 	GenerationController Generator;
 
@@ -22,7 +22,7 @@ public class IslandManage : MonoBehaviour {
 			if (timer >= 0)
 				timer -= Time.fixedDeltaTime;
 			else {
-				for (int i = Generator.Island.Length - 1; i >= 0; i--)
+				for (int i = Generator.Island.Count - 1; i >= 0; i--)
 					sum += transform.gameObject == Generator.Island [i] ? 1 : 0;
 				if (sum == 0)
 					ReadyForSleep = true;
@@ -32,8 +32,14 @@ public class IslandManage : MonoBehaviour {
 		} else {
 			if (TimeToDie >= 0)
 				TimeToDie -= Time.fixedDeltaTime;
-			else
+			else {
 				gameObject.SetActive (false);
+
+				if (gameObject != null ) {
+					Destroy (gameObject, 1);
+					Destroy (this);
+				}
+			}
 		}
 	}
 }

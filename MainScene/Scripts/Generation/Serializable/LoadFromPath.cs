@@ -60,7 +60,7 @@ public class LoadFromPath : MonoBehaviour {
 		
 	int LenghtOfArray (string path)
 	{
-		var di = new DirectoryInfo (Application.dataPath + "/MainScene/Prefabs/Obs/" + path);
+		var di = new DirectoryInfo (Application.dataPath + "/ChewyPiggy/MainScene/Prefabs/Obs/" + path);
 		FileInfo[] files = di.GetFiles ("*.prefab");
 		return files.Length;
 	}
